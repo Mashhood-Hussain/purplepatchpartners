@@ -1,0 +1,44 @@
+Build a full accessible website for Purple Patch Partners (purplepatchpartners.co.uk), an organisation supporting people with learning disabilities and autism. The site should be clean, modern, and user-friendly, optimized for families, carers, and social workers. Follow these detailed specifications:
+
+1. **Overall Goal**
+- Friendly, supportive, and inclusive tone
+- Similar style to mencap.org.uk
+- Focus on accessibility, mobile-friendly design, and clear navigation
+- Easy Read mode with simplified language and symbols (Widgit or accessible icons)
+
+2. **Pages**
+- Homepage: Introduction, mission summary, services overview, quick referral button, success stories preview
+- Mission & Values: Detailed purpose, approach, beliefs
+- What We Offer: Services, daily activities, life skills development, community involvement, Learning by Questions tablet usage
+- Referrals: Simple form for families, carers, social workers; fields for contact info, needs assessment, referral source; submission stored in backend
+- Gallery: Photo and video gallery (grid layout with lightbox); prepare for optional Instagram API integration
+- Information Pages: "What are Learning Disabilities?", "What is Autism?", Overview of SEND Support (Blackburn Local Offer)
+- Stories of Progress: “Hitting Their Purple Patch” section with stories, photos, and videos
+
+3. **Design & Branding**
+- Primary colour: Disability awareness purple
+- Clear typography, large readable fonts
+- Simple navigation menus with prominent buttons
+- Include icons and imagery for understanding
+- High contrast and visually friendly layout
+
+4. **Accessibility Features**
+- Easy Read toggle: simplified text + symbols
+- High contrast mode
+- Keyboard navigation and screen reader compatibility
+- Alt text for all images
+- Large buttons and spacing for touch targets
+
+5. **Additional Notes**
+- Daily schedule ~6 hours of activities
+- Future plan: wheelchair-accessible activities for wider community
+- Include space for team info, organizational history, and success story templates
+
+6. **Technical Requirements**
+- Use React and Tailwind CSS for front-end
+- Multi-page routing with React Router
+- Optional Bolt or Replit database integration for forms and content management
+- Responsive design for desktop and mobile
+- Semantic HTML for accessibility
+
+**Output:** Generate fully functional React project code ready for deployment to netlify app. Include all components, pages, routing, Tailwind configuration, accessibility features, and example content. Provide clear folder structure with components, pages, and assets.
