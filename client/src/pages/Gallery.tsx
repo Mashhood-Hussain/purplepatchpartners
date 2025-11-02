@@ -18,7 +18,7 @@ export default function Gallery() {
 
   const galleryItems = [
     {
-      url: "https://images.unsplash.com/photo-1513128034602-7814ccaddd4e?w=800&h=600&fit=crop",
+      url: "/images/01.jpg",
       title: isEasyRead ? "Art Class" : "Creative Arts Workshop",
       category: 'activities'
     },
