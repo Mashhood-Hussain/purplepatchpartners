@@ -83,7 +83,7 @@ export default function Home() {
             </div>
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop"
+                src="/images/02.jpg"
                 alt={isEasyRead ? "Happy people learning together" : "Diverse group of people engaging in activities together"}
                 className="rounded-xl shadow-xl w-full"
                 data-testid="img-hero"
