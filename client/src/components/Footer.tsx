@@ -44,7 +44,7 @@ export function Footer() {
                 <Twitter className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/purplepatch_cic"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover-elevate active-elevate-2 rounded-full p-2"
