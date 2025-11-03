@@ -37,14 +37,14 @@ export default function Home() {
       quote: isEasyRead
         ? "I love coming here. I made lots of friends and learned to cook!"
         : "Purple Patch Partners has transformed my life. I've gained confidence and independence I never thought possible.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop"
+      image: "/images/03.jpg"
     },
     {
       name: "James",
       quote: isEasyRead
         ? "The staff are kind. I do art and play games. It makes me happy!"
         : "The supportive environment here has allowed me to develop new skills and connect with an amazing community.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop"
+      image: "/images/04.jpg"
     },
   ];
 
