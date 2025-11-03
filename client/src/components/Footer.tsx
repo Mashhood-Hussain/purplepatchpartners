@@ -24,7 +24,7 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/PurplePatchPartners/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover-elevate active-elevate-2 rounded-full p-2"
@@ -34,7 +34,7 @@ export function Footer() {
                 <Facebook className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://x.com/PurplePatch_CiC"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover-elevate active-elevate-2 rounded-full p-2"
