@@ -23,17 +23,17 @@ export default function Gallery() {
       category: 'activities'
     },
     {
-      url: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&h=600&fit=crop",
+      url: "/images/05.jpg",
       title: isEasyRead ? "Cooking Together" : "Cooking Skills Development",
       category: 'activities'
     },
     {
-      url: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=600&fit=crop",
+      url: "/images/06.jpg",
       title: isEasyRead ? "Computer Learning" : "Technology Training",
       category: 'activities'
     },
     {
-      url: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&h=600&fit=crop",
+      url: "/images/07.jpg",
       title: isEasyRead ? "Making Friends" : "Social Engagement",
       category: 'activities'
     },
@@ -43,7 +43,7 @@ export default function Gallery() {
       category: 'achievements'
     },
     {
-      url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=600&fit=crop",
+      url: "/images/08.jpg",
       title: isEasyRead ? "Graduation" : "Skill Development Graduation",
       category: 'achievements'
     },
