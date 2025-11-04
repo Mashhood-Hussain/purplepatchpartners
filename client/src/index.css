@@ -309,7 +309,7 @@ body.high-contrast-mode * {
   }
 
   .large-text-mode h1 {
-    font-size: 4.5rem;
+    font-size: 4rem;
   }
 
   .large-text-mode h2 {
@@ -317,7 +317,7 @@ body.high-contrast-mode * {
   }
 
   .large-text-mode h3 {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 }
 
