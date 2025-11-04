@@ -27,31 +27,22 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
     return (saved as 'normal' | 'large') || 'normal';
   });
 
+  // Easy Read Mode
   useEffect(() => {
     localStorage.setItem("easyReadMode", isEasyRead.toString());
-    if (isEasyRead) {
-      document.documentElement.classList.add("easy-read-mode");
-    } else {
-      document.documentElement.classList.remove("easy-read-mode");
-    }
+    document.documentElement.classList.toggle("easy-read-mode", isEasyRead);
   }, [isEasyRead]);
 
+  // High Contrast Mode
   useEffect(() => {
     localStorage.setItem("highContrastMode", isHighContrast.toString());
-    if (isHighContrast) {
-      document.documentElement.classList.add("high-contrast-mode");
-    } else {
-      document.documentElement.classList.remove("high-contrast-mode");
-    }
+    document.documentElement.classList.toggle("high-contrast-mode", isHighContrast);
   }, [isHighContrast]);
 
+  // Large Text Mode
   useEffect(() => {
     localStorage.setItem("textSize", textSize);
-    if (textSize === 'large') {
-      document.documentElement.classList.add("large-text-mode");
-    } else {
-      document.documentElement.classList.remove("large-text-mode");
-    }
+    document.documentElement.classList.toggle("large-text-mode", textSize === 'large');
   }, [textSize]);
 
   const toggleEasyRead = () => setIsEasyRead(prev => !prev);
