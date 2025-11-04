@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -46,7 +47,7 @@
 
   --popover-border: 240 6% 82%;
 
-  --primary: 262 52% 47%;
+  --primary: 303 61% 29%;
 
   --primary-foreground: 262 50% 98%;
 
@@ -309,15 +310,15 @@ body.high-contrast-mode * {
   }
 
   .large-text-mode h1 {
-    font-size: 3.5rem;
+    font-size: 4rem;
   }
 
   .large-text-mode h2 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 
   .large-text-mode h3 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }
 

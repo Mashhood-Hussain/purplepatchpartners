@@ -11,12 +11,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Column 1: Logo and Tagline */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Heart className="h-8 w-8 text-primary" aria-hidden="true" />
-              <span className="font-heading text-lg font-bold text-card-foreground">
-                {isEasyRead ? "Purple Patch" : "Purple Patch Partners"}
-              </span>
-            </div>
+            
+<img
+  src="/images/purplepatchlogo.png"
+  alt="Purple Patch Partners logo with tagline"
+  className="h-10 sm:h-12 object-contain"
+/>
+
+
             <p className="text-sm text-muted-foreground">
               {isEasyRead
                 ? "We help people with learning disabilities and autism to be happy and do well."

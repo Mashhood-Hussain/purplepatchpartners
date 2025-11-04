@@ -52,13 +52,11 @@ export default {
         },
         ring: "hsl(var(--ring) / <alpha-value>)",
       },
-      fontFamily: {
-        sans: ["var(--font-sans)"],
-        serif: ["var(--font-serif)"],
-        mono: ["var(--font-mono)"],
-        heading: ["var(--font-heading)"],
-        "easy-read": ["var(--font-easy-read)"],
-      },
+fontFamily: {
+  sans: ["'Atkinson Hyperlegible'", "Inter", "sans-serif"],
+  heading: ["'Atkinson Hyperlegible'", "Poppins", "sans-serif"],
+  "easy-read": ["'Atkinson Hyperlegible'", "Comic Sans MS", "OpenDyslexic", "sans-serif"],
+},
     },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],

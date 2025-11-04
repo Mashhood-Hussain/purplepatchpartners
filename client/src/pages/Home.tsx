@@ -33,14 +33,14 @@ export default function Home() {
 
   const successStories = [
     {
-      name: "Sarah",
+      name: "Rafik",
       quote: isEasyRead
         ? "I love coming here. I made lots of friends and learned to cook!"
         : "Purple Patch Partners has transformed my life. I've gained confidence and independence I never thought possible.",
       image: "/images/03.jpg"
     },
     {
-      name: "James",
+      name: "Abdul",
       quote: isEasyRead
         ? "The staff are kind. I do art and play games. It makes me happy!"
         : "The supportive environment here has allowed me to develop new skills and connect with an amazing community.",
@@ -140,7 +140,11 @@ export default function Home() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
-              <Heart className="h-10 w-10 text-primary" aria-hidden="true" />
+<img
+  src="/images/purplelogo.png"
+  alt="Purple Patch Partners logo with tagline"
+  className="h-10 sm:h-12 object-contain"
+/>
             </div>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-card-foreground">
               {isEasyRead ? "Our Promise" : "Our Mission"}
@@ -222,6 +226,8 @@ export default function Home() {
                 : "Get in touch with our team to discuss how we can support you or someone you care about."}
             </p>
             <Link href="/referrals">
+            <br></br>
+            <br></br>
               <Button size="lg" variant="secondary" data-testid="button-cta-refer">
                 {isEasyRead ? "Contact Us" : "Start a Referral"}
                 <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />

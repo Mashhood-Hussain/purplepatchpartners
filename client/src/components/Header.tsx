@@ -77,19 +77,18 @@ export function Header() {
           {/* Main Navigation */}
           <div className="flex h-16 items-center justify-between">
             <Link href="/" className="flex items-center gap-3 hover-elevate active-elevate-2 rounded-md px-3 py-2" data-testid="link-home-logo">
-              <Heart className="h-8 w-8 text-primary" aria-hidden="true" />
-              <div className="flex flex-col">
-                <span className="font-heading text-xl font-bold text-foreground">
-                  {isEasyRead ? "Purple Patch" : "Purple Patch Partners"}
-                </span>
-                <span className="text-xs text-muted-foreground hidden sm:inline">
-                  {isEasyRead ? "Helping People Shine" : "a partnership to independence"}
-                </span>
-              </div>
+
+
+<img
+  src="/images/purplepatchlogo.png"
+  alt="Purple Patch Partners logo with tagline"
+  className="h-10 sm:h-12 object-contain"
+/>
+
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
+            <nav className="hidden lg:flex items-center gap-6 -ml-16" aria-label="Main navigation">
               {navigationItems.map((item) => (
                 <Link
                   key={item.path}
@@ -130,7 +129,7 @@ export function Header() {
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-border bg-background" role="navigation" aria-label="Mobile navigation">
-            <div className="container mx-auto px-4 py-4 space-y-2">
+            <div className="container mx-auto px-2 sm:py-4 space-y-10">
               {navigationItems.map((item) => (
                 <Link
                   key={item.path}
