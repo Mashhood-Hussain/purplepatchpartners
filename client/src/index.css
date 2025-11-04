@@ -247,32 +247,32 @@
   }
 
 /* ===========================
-   HIGH CONTRAST MODE (fixed)
+   HIGH CONTRAST MODE (pale yellow)
    =========================== */
 html.high-contrast-mode,
 body.high-contrast-mode {
   --background: 0 0% 0%;
-  --foreground: 60 100% 50%;
+  --foreground: 60 70% 75%;
   --border: 0 0% 100%;
   --input: 0 0% 100%;
-  --ring: 60 100% 50%;
+  --ring: 60 70% 75%;
 
   --card: 0 0% 0%;
-  --card-foreground: 60 100% 50%;
+  --card-foreground: 60 70% 75%;
   --popover: 0 0% 0%;
-  --popover-foreground: 60 100% 50%;
+  --popover-foreground: 60 70% 75%;
 
-  --primary: 60 100% 50%;
+  --primary: 60 70% 75%;
   --primary-foreground: 0 0% 0%;
-  --secondary: 60 100% 50%;
+  --secondary: 60 70% 75%;
   --secondary-foreground: 0 0% 0%;
-  --accent: 60 100% 50%;
+  --accent: 60 70% 75%;
   --accent-foreground: 0 0% 0%;
   --muted: 0 0% 0%;
-  --muted-foreground: 60 100% 50%;
+  --muted-foreground: 60 70% 75%;
 }
 
-/* Dark + High Contrast */
+/* Dark + High Contrast (pale yellow) */
 html.dark.high-contrast-mode,
 body.dark.high-contrast-mode {
   --background: 0 0% 0%;
@@ -282,23 +282,13 @@ body.dark.high-contrast-mode {
   --ring: 0 0% 100%;
   --card: 0 0% 0%;
   --card-foreground: 0 0% 100%;
-  --primary: 0 0% 100%;
+  --primary: 60 70% 75%;
   --primary-foreground: 0 0% 0%;
-  --accent: 0 0% 100%;
+  --accent: 60 70% 75%;
   --accent-foreground: 0 0% 0%;
 }
 
-/* Extra visible outlines and borders */
-html.high-contrast-mode *:focus,
-body.high-contrast-mode *:focus {
-  outline: 3px solid hsl(var(--ring));
-  outline-offset: 2px;
-}
 
-html.high-contrast-mode *,
-body.high-contrast-mode * {
-  border-width: 2px !important;
-}
 
 
 
