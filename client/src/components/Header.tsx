@@ -83,7 +83,7 @@ export function Header() {
                   {isEasyRead ? "Purple Patch" : "Purple Patch Partners"}
                 </span>
                 <span className="text-xs text-muted-foreground hidden sm:inline">
-                  {isEasyRead ? "Helping People Shine" : "Supporting People with Learning Disabilities"}
+                  {isEasyRead ? "Helping People Shine" : "a partnership to independence"}
                 </span>
               </div>
             </Link>
