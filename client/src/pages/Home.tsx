@@ -147,7 +147,7 @@ export default function Home() {
 />
             </div>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-card-foreground">
-              {isEasyRead ? "Our Promise" : "Our Mission"}
+              {isEasyRead ? "Our Promise" : "Our Ethos"}
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
               {isEasyRead
@@ -155,6 +155,7 @@ export default function Home() {
                 : "At Purple Patch Partners, we believe every individual deserves the opportunity to thrive. We're dedicated to providing inclusive, person-centered support that empowers people with learning disabilities and autism to live fulfilling, independent lives while making meaningful contributions to their community."}
             </p>
             <Link href="/mission">
+            <br></br>
               <Button variant="outline" size="lg" data-testid="button-mission">
                 {isEasyRead ? "Read More" : "Learn About Our Values"}
               </Button>

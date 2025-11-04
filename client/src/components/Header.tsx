@@ -11,11 +11,11 @@ export function Header() {
 
   const navigationItems = [
     { path: "/", label: "Home", easyReadLabel: "Home" },
-    { path: "/mission", label: "Mission & Values", easyReadLabel: "Our Mission" },
     { path: "/services", label: "What We Offer", easyReadLabel: "What We Do" },
+    { path: "/mission", label: "Ethos & Values", easyReadLabel: "Our Mission" },
+    { path: "/stories", label: "Success Stories", easyReadLabel: "Happy Stories" },
     { path: "/referrals", label: "Referrals", easyReadLabel: "Get Support" },
     { path: "/gallery", label: "Gallery", easyReadLabel: "Photos & Videos" },
-    { path: "/stories", label: "Success Stories", easyReadLabel: "Happy Stories" },
   ];
 
   return (

@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Column 1: Logo and Tagline */}
           <div className="space-y-4">
-            
+
 <img
   src="/images/purplepatchlogo.png"
   alt="Purple Patch Partners logo with tagline"
