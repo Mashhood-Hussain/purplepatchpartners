@@ -262,7 +262,14 @@ export default function Services() {
       <section className="py-16 md:py-20 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-6">
-            <Heart className="h-16 w-16 text-primary mx-auto" aria-hidden="true" />
+<div className="flex justify-center">
+  <img
+    src="/images/purplelogo.png"
+    alt="Purple Patch Partners logo with tagline"
+    className="h-10 sm:h-12 object-contain"
+  />
+</div>
+
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
               {isEasyRead ? "Want to Join Us?" : "Interested in Our Services?"}
             </h2>
@@ -272,6 +279,7 @@ export default function Services() {
                 : "Contact us to learn more about how our programs can support you or someone you care about."}
             </p>
             <Link href="/referrals">
+            <br></br>
               <Button size="lg" data-testid="button-services-refer">
                 {isEasyRead ? "Get in Touch" : "Make a Referral"}
               </Button>
@@ -282,3 +290,4 @@ export default function Services() {
     </div>
   );
 }
+
