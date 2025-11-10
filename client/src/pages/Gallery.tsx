@@ -82,6 +82,9 @@ export default function Gallery() {
                 ? "See what we do every day. Look at our fun activities and happy moments!"
                 : "Explore our collection of photos and videos showcasing daily activities, achievements, and community events."}
             </p>
+            <br></br>
+            <br></br>
+            <p> Timeline video of story book would be here maybe? </p>
           </div>
         </div>
       </section>
