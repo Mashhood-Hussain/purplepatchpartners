@@ -51,7 +51,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/10 via-primary/5 to-background py-16 md:py-24 lg:py-32">
+      <section className="relative bg-gradient-to-br from-primary/10 via-primary/5 to-background py-10 md:py-16 lg:py-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">

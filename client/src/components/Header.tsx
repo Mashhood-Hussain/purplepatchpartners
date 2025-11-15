@@ -11,11 +11,13 @@ export function Header() {
 
   const navigationItems = [
     { path: "/", label: "Home", easyReadLabel: "Home" },
-    { path: "/services", label: "What We Offer", easyReadLabel: "What We Do" },
+    { path: "/services", label: "Our Offer", easyReadLabel: "What We Do" },
     { path: "/mission", label: "Ethos & Values", easyReadLabel: "Our Mission" },
     { path: "/stories", label: "Success Stories", easyReadLabel: "Happy Stories" },
-    { path: "/referrals", label: "Referrals", easyReadLabel: "Get Support" },
+    { path: "/referrals", label: "Contact Us", easyReadLabel: "Get Support" },
     { path: "/gallery", label: "Gallery", easyReadLabel: "Photos & Videos" },
+    { path: "/team", label: "Our Team", easyReadLabel: "Our People" },
+    { path: "/news", label: "News", easyReadLabel: "Info" },
   ];
 
   return (
@@ -29,6 +31,8 @@ export function Header() {
       </a>
 
       <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Accessibility Toolbar */}
           <div className="border-b border-border py-2">
@@ -75,25 +79,25 @@ export function Header() {
           </div>
 
           {/* Main Navigation */}
-          <div className="flex h-16 items-center justify-between">
+          <div className="flex h-20 items-center justify-between">
             <Link href="/" className="flex items-center gap-3 hover-elevate active-elevate-2 rounded-md px-3 py-2" data-testid="link-home-logo">
 
 
 <img
   src="/images/purplepatchlogo.png"
   alt="Purple Patch Partners logo with tagline"
-  className="h-10 sm:h-12 object-contain"
+  className="h-10 sm:h-12 object-contain -ml-8"
 />
 
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-6 -ml-16" aria-label="Main navigation">
+            <nav className="hidden lg:flex items-center gap-8 -ml-14" aria-label="Main navigation">  {/* more spacing ur choice*/}
               {navigationItems.map((item) => (
                 <Link
                   key={item.path}
                   href={item.path}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                  className={`text-xl md:text-2l font-medium transition-colors hover:text-primary ${
                     location === item.path ? "text-primary" : "text-foreground"
                   }`}
                   data-testid={`link-nav-${item.label.toLowerCase().replace(/\s+/g, '-')}`}

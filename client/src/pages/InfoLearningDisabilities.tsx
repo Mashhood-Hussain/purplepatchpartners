@@ -219,6 +219,7 @@ export default function InfoLearningDisabilities() {
                 : "Contact us to discuss how we can support you or someone you care about with a learning disability."}
             </p>
             <Link href="/referrals">
+                        <br></br>
               <Button size="lg" data-testid="button-make-referral">
                 {isEasyRead ? "Get in Touch" : "Make a Referral"}
               </Button>

@@ -237,6 +237,7 @@ export default function InfoAutism() {
                 : "Contact us to discuss autism-informed support tailored to individual needs."}
             </p>
             <Link href="/referrals">
+            <br></br>
               <Button size="lg" data-testid="button-make-referral">
                 {isEasyRead ? "Get in Touch" : "Make a Referral"}
               </Button>
