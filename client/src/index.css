@@ -307,37 +307,6 @@ body.dark.high-contrast-mode {
 }
 
 /* ---------------------------------------- */
-/* Two-Row Navbar for Large Text Mode       */
-/* ---------------------------------------- */
-
-.large-text-mode nav[aria-label="Main navigation"] {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;  /* center both rows */
-  align-items: center;
-  row-gap: 0.75rem;         /* space between rows */
-  column-gap: 1.5rem;       /* space between items */
-  max-width: 100%;
-  text-align: center;
-}
-
-/* Every nav link should be flexible and not wrap individually */
-.large-text-mode nav[aria-label="Main navigation"] > * {
-  flex: 0 0 auto;
-  white-space: nowrap;
-}
-
-/* Items 1–4 stay on row 1 */
-.large-text-mode nav[aria-label="Main navigation"] > *:nth-child(-n+4) {
-  order: 1;
-}
-
-/* Items 5–8 go to row 2 */
-.large-text-mode nav[aria-label="Main navigation"] > *:nth-child(n+5) {
-  order: 2;
-}
-
-/* ---------------------------------------- */
 /* Standard Large Text Mode site scaling    */
 /* ---------------------------------------- */
 
@@ -352,6 +321,36 @@ body.dark.high-contrast-mode {
 .large-text-mode header {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+/* ---------------------------------------- */
+/* Two-Row Navbar for Large Text Mode (DESKTOP ONLY) */
+/* ---------------------------------------- */
+
+@media (min-width: 1024px) {
+  .large-text-mode nav[aria-label="Main navigation"] {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;  
+    align-items: center;
+    row-gap: 0.75rem;       
+    column-gap: 1.5rem;     
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .large-text-mode nav[aria-label="Main navigation"] > * {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .large-text-mode nav[aria-label="Main navigation"] > *:nth-child(-n+4) {
+    order: 1;
+  }
+
+  .large-text-mode nav[aria-label="Main navigation"] > *:nth-child(n+5) {
+    order: 2;
+  }
 }
 
 
