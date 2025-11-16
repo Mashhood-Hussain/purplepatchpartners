@@ -16,6 +16,11 @@ import InfoLearningDisabilities from "@/pages/InfoLearningDisabilities";
 import InfoAutism from "@/pages/InfoAutism";
 import InfoSEND from "@/pages/InfoSEND";
 import NotFound from "@/pages/not-found";
+import TeamPage from "./pages/Team";
+import NewsPage from "./pages/News";
+import ContactPage from "./pages/contact"
+
+
 
 function Router() {
   return (
@@ -29,6 +34,9 @@ function Router() {
       <Route path="/info/learning-disabilities" component={InfoLearningDisabilities} />
       <Route path="/info/autism" component={InfoAutism} />
       <Route path="/info/send-support" component={InfoSEND} />
+      <Route path="/team" component={TeamPage} />
+      <Route path="/news" component={NewsPage} />
+      <Route path="/contact" component={ContactPage} />
       <Route component={NotFound} />
     </Switch>
   );

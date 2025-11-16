@@ -14,11 +14,12 @@ export function Header() {
     { path: "/services", label: "Our Offer", easyReadLabel: "What We Do" },
     { path: "/mission", label: "Ethos & Values", easyReadLabel: "Our Mission" },
     { path: "/stories", label: "Success Stories", easyReadLabel: "Happy Stories" },
-    { path: "/referrals", label: "Contact Us", easyReadLabel: "Get Support" },
     { path: "/gallery", label: "Gallery", easyReadLabel: "Photos & Videos" },
-    { path: "/team", label: "Our Team", easyReadLabel: "Our People" },
-    { path: "/news", label: "News", easyReadLabel: "Info" },
-  ];
+    { path: "/team", label: "Our Team", easyReadLabel: "Meet the Team" },
+    { path: "/news", label: "News", easyReadLabel: "Updates" },
+    { path: "/contact", label: "Contact Us", easyReadLabel: "Contact" },
+
+  ];  
 
   return (
     <>
