@@ -18,8 +18,7 @@ import InfoSEND from "@/pages/InfoSEND";
 import NotFound from "@/pages/not-found";
 import TeamPage from "./pages/Team";
 import NewsPage from "./pages/News";
-import ContactPage from "./pages/contact"
-
+import ContactPage from "./pages/Contact"
 
 
 function Router() {
