@@ -1,6 +1,30 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Users, Shield, Star } from "lucide-react";
 import { useAccessibility } from "@/contexts/AccessibilityContext";
+import { useState } from "react";
+
+// Dropdown Component
+function Dropdown({ title, content }: { title: string; content: string }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="border bg-white rounded-lg shadow-sm mb-4">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex justify-between items-center p-4 text-left text-xl font-semibold"
+      >
+        {title}
+        <span className="text-2xl">{open ? "−" : "+"}</span>
+      </button>
+
+      {open && (
+        <div className="px-4 pb-4 text-lg text-muted-foreground leading-relaxed">
+          {content}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Mission() {
   const { isEasyRead } = useAccessibility();
@@ -10,29 +34,37 @@ export default function Mission() {
       icon: Heart,
       title: "Inclusion",
       easyReadTitle: "Everyone Belongs",
-      description: "We celebrate diversity and ensure everyone feels valued, respected, and included in all aspects of our community.",
-      easyReadDescription: "Everyone is welcome here. We are all different and that is good. Everyone can join in."
+      description:
+        "We celebrate diversity and ensure everyone feels valued, respected, and included in all aspects of our community.",
+      easyReadDescription:
+        "Everyone is welcome here. We are all different and that is good. Everyone can join in.",
     },
     {
       icon: Users,
       title: "Empowerment",
       easyReadTitle: "You Can Do It",
-      description: "We support individuals to make their own choices, develop their potential, and take control of their lives.",
-      easyReadDescription: "We help you make your own choices. We believe you can do amazing things."
+      description:
+        "We support individuals to make their own choices, develop their potential, and take control of their lives.",
+      easyReadDescription:
+        "We help you make your own choices. We believe you can do amazing things.",
     },
     {
       icon: Shield,
       title: "Respect",
       easyReadTitle: "Be Kind",
-      description: "We treat everyone with dignity, compassion, and understanding, honoring their unique perspectives and experiences.",
-      easyReadDescription: "We are kind to everyone. We listen to you. Your feelings matter."
+      description:
+        "We treat everyone with dignity, compassion, and understanding, honoring their unique perspectives and experiences.",
+      easyReadDescription:
+        "We are kind to everyone. We listen to you. Your feelings matter.",
     },
     {
       icon: Star,
       title: "Quality",
       easyReadTitle: "Do Our Best",
-      description: "We are committed to providing the highest standard of person-centered support and continuously improving our services.",
-      easyReadDescription: "We always try our best. We want to help you be happy and safe."
+      description:
+        "We are committed to providing the highest standard of person-centered support and continuously improving our services.",
+      easyReadDescription:
+        "We always try our best. We want to help you be happy and safe.",
     },
   ];
 
@@ -69,39 +101,89 @@ export default function Mission() {
                 <p className="text-lg leading-relaxed text-muted-foreground">
                   {isEasyRead ? (
                     <>
-                      <strong className="text-foreground">Purple Patch Partners helps people shine.</strong>
-                      <br /><br />
-                      We work with people who have learning disabilities and autism.
-                      <br /><br />
+                      <strong className="text-foreground">
+                        Purple Patch Partners helps people shine.
+                      </strong>
+                      <br />
+                      <br />
+                      We work with people who have learning disabilities and
+                      autism.
+                      <br />
+                      <br />
                       We help them:
+                      <br />• Learn new things
+                      <br />• Make friends
+                      <br />• Be independent
+                      <br />• Feel proud of themselves
+                      <br />• Join in with their community
                       <br />
-                      • Learn new things
                       <br />
-                      • Make friends
-                      <br />
-                      • Be independent
-                      <br />
-                      • Feel proud of themselves
-                      <br />
-                      • Join in with their community
-                      <br /><br />
-                      Everyone deserves to be happy and do well. We help make that happen.
+                      Everyone deserves to be happy and do well. We help make
+                      that happen.
                     </>
                   ) : (
                     <>
-                      <strong className="text-foreground">Purple Patch Partners is committed to transforming lives through person-centered, inclusive support.</strong>
-                      <br /><br />
-                      We provide comprehensive services for individuals with learning disabilities and autism, helping them develop essential life skills, build meaningful relationships, and actively participate in their community.
-                      <br /><br />
-                      Our approach is rooted in the belief that every person has unique strengths and potential. We work collaboratively with individuals, families, and carers to create personalized support plans that promote independence, confidence, and overall wellbeing.
-                      <br /><br />
-                      Through structured daily activities, skill development programs, and community engagement opportunities, we empower the people we support to achieve their goals and live fulfilling, independent lives.
+                      <strong className="text-foreground">
+                        Purple Patch Partners is committed to transforming lives
+                        through person-centered, inclusive support.
+                      </strong>
+                      <br />
+                      <br />
+                      We provide comprehensive services for individuals with
+                      learning disabilities and autism, helping them develop
+                      essential life skills, build meaningful relationships, and
+                      actively participate in their community.
+                      <br />
+                      <br />
+                      Our approach is rooted in the belief that every person has
+                      unique strengths and potential. We work collaboratively
+                      with individuals, families, and carers to create
+                      personalized support plans that promote independence,
+                      confidence, and overall wellbeing.
+                      <br />
+                      <br />
+                      Through structured daily activities, skill development
+                      programs, and community engagement opportunities, we
+                      empower the people we support to achieve their goals and
+                      live fulfilling, independent lives.
                     </>
                   )}
                 </p>
               </CardContent>
             </Card>
           </div>
+        </div>
+      </section>
+
+      {/* Dropdown Sections */}
+      <section className="py-16 md:py-20 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground text-center mb-10">
+            {isEasyRead ? "Learn More" : "Understanding Our Support"}
+          </h2>
+
+          {[
+            {
+              title: "Learning Disabilities",
+              content: isEasyRead
+                ? "Some people may find learning new things difficult. We help by making learning simple, fun, and easy to understand."
+                : "Learning disabilities affect how individuals understand information and communicate. We provide structured, accessible activities that support personal development and confidence building.",
+            },
+            {
+              title: "Understanding Autism",
+              content: isEasyRead
+                ? "Autism affects how people communicate and how they understand the world. We make a calm, safe space where everyone can be themselves."
+                : "Autism affects communication, sensory processing, and social interaction. We use autism-friendly approaches such as visual routines, sensory-aware spaces, and personalised communication support.",
+            },
+            {
+              title: "How We Support Individuals",
+              content: isEasyRead
+                ? "We help you learn, make friends, feel confident, and do things you enjoy."
+                : "Through person-centred planning, daily activities, and skill building, we support individuals to gain independence, develop strong relationships, and participate actively in their community.",
+            },
+          ].map((item, index) => (
+            <Dropdown key={index} title={item.title} content={item.content} />
+          ))}
         </div>
       </section>
 
@@ -122,16 +204,25 @@ export default function Mission() {
 
             <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
               {values.map((value, index) => (
-                <Card key={index} className="hover-elevate active-elevate-2 bg-background" data-testid={`card-value-${index}`}>
+                <Card
+                  key={index}
+                  className="hover-elevate active-elevate-2 bg-background"
+                  data-testid={`card-value-${index}`}
+                >
                   <CardContent className="p-6 md:p-8 space-y-4">
                     <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                      <value.icon className="h-8 w-8 text-primary" aria-hidden="true" />
+                      <value.icon
+                        className="h-8 w-8 text-primary"
+                        aria-hidden="true"
+                      />
                     </div>
                     <h3 className="font-heading text-2xl font-semibold text-foreground">
                       {isEasyRead ? value.easyReadTitle : value.title}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      {isEasyRead ? value.easyReadDescription : value.description}
+                      {isEasyRead
+                        ? value.easyReadDescription
+                        : value.description}
                     </p>
                   </CardContent>
                 </Card>
@@ -168,7 +259,9 @@ export default function Mission() {
               <Card data-testid="card-approach-2">
                 <CardContent className="p-6 md:p-8">
                   <h3 className="font-heading text-xl font-semibold text-foreground mb-3">
-                    {isEasyRead ? "Working Together" : "Collaborative Partnership"}
+                    {isEasyRead
+                      ? "Working Together"
+                      : "Collaborative Partnership"}
                   </h3>
                   <p className="text-muted-foreground">
                     {isEasyRead
@@ -181,7 +274,9 @@ export default function Mission() {
               <Card data-testid="card-approach-3">
                 <CardContent className="p-6 md:p-8">
                   <h3 className="font-heading text-xl font-semibold text-foreground mb-3">
-                    {isEasyRead ? "Learning and Growing" : "Continuous Development"}
+                    {isEasyRead
+                      ? "Learning and Growing"
+                      : "Continuous Development"}
                   </h3>
                   <p className="text-muted-foreground">
                     {isEasyRead
