@@ -144,7 +144,7 @@ export default function Services() {
               <p className="text-lg text-muted-foreground">
                 {isEasyRead
                   ? "We help you learn to do things on your own."
-                  : "Personalized support to help you develop essential skills for independent living."}
+                  : "Personalised support to help you develop essential skills for independent living."}
               </p>
             </div>
 
@@ -244,7 +244,7 @@ export default function Services() {
                         </>
                       ) : (
                         <>
-                          We utilize Learning by Questions (LbQ) tablets as part of our educational support program. This innovative technology provides personalized, interactive learning experiences tailored to individual abilities and learning styles.
+                          We utilize Learning by Questions (LbQ) tablets as part of our educational support program. This innovative technology provides personalised, interactive learning experiences tailored to individual abilities and learning styles.
                           <br /><br />
                           The platform offers immediate feedback, progress tracking, and engaging content that makes learning enjoyable while building essential literacy and numeracy skills at each person's own pace.
                         </>

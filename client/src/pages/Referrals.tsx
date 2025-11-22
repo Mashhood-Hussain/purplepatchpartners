@@ -33,16 +33,27 @@ export default function Referrals() {
   const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  
+  // --- DEFAULT VALUES: build as a Partial then assert to InsertReferral to satisfy TS
+const defaultValues: Partial<InsertReferral> = {
+  name: "",
+  email: "",
+  phone: "",
+  guardianName: "",
+  referredPersonName: "",
+  canCollectDOB: "no",
+  dob: undefined,
+  ageGroup: undefined, // ✅ FIXED
+  needsAssessment: "",
+  referralSource: "",
+  additionalNotes: "",
+};
+
+
   const form = useForm<InsertReferral>({
     resolver: zodResolver(insertReferralSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      phone: "",
-      needsAssessment: "",
-      referralSource: "",
-      additionalNotes: "",
-    },
+    // assert defaultValues to InsertReferral because useForm expects the full type
+    defaultValues: defaultValues as InsertReferral,
   });
 
   const submitMutation = useMutation({
@@ -62,15 +73,25 @@ export default function Referrals() {
     onError: (error: Error) => {
       toast({
         title: isEasyRead ? "Something Went Wrong" : "Submission Failed",
-        description: error.message || (isEasyRead ? "Please try again." : "Please check your information and try again."),
+        description:
+          error.message ||
+          (isEasyRead ? "Please try again." : "Please check your information and try again."),
         variant: "destructive",
       });
     },
   });
 
-  const onSubmit = (data: InsertReferral) => {
-    submitMutation.mutate(data);
-  };
+const onSubmit = (data: InsertReferral) => {
+  if (data.canCollectDOB === "yes") data.ageGroup = undefined;
+  else data.dob = undefined;
+
+  submitMutation.mutate(data);
+};
+
+
+
+  // Derived watched value (safe typing)
+  const canCollect = form.watch("canCollectDOB") === "yes";
 
   if (isSubmitted) {
     return (
@@ -88,24 +109,23 @@ export default function Referrals() {
                 {isEasyRead ? (
                   <>
                     We got your message!
-                    <br /><br />
+                    <br />
+                    <br />
                     Someone from our team will call you soon.
-                    <br /><br />
+                    <br />
+                    <br />
                     Usually within 2 days.
                   </>
                 ) : (
                   <>
                     Thank you for submitting your referral. Our team will review the information and contact you within 2 business days to discuss next steps.
-                    <br /><br />
+                    <br />
+                    <br />
                     If you have any urgent questions, please don't hesitate to call us directly.
                   </>
                 )}
               </p>
-              <Button
-                onClick={() => setIsSubmitted(false)}
-                variant="outline"
-                data-testid="button-submit-another"
-              >
+              <Button onClick={() => setIsSubmitted(false)} variant="outline" data-testid="button-submit-another">
                 {isEasyRead ? "Send Another Form" : "Submit Another Referral"}
               </Button>
             </CardContent>
@@ -157,10 +177,27 @@ export default function Referrals() {
                             {isEasyRead ? "Your Name" : "Full Name"} <span className="text-destructive">*</span>
                           </FormLabel>
                           <FormControl>
+                            <Input placeholder={isEasyRead ? "Type your name" : "Enter full name"} className="min-h-12" data-testid="input-name" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Guardian Name */}
+                    <FormField
+                      control={form.control}
+                      name="guardianName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-base font-semibold">
+                            {isEasyRead ? "Name of the grown-up" : "Guardian's Name"} <span className="text-destructive">*</span>
+                          </FormLabel>
+                          <FormControl>
                             <Input
-                              placeholder={isEasyRead ? "Type your name" : "Enter full name"}
+                              placeholder={isEasyRead ? "Write the grown-up’s name" : "Enter guardian's full name"}
                               className="min-h-12"
-                              data-testid="input-name"
+                              data-testid="input-guardian-name"
                               {...field}
                             />
                           </FormControl>
@@ -168,6 +205,105 @@ export default function Referrals() {
                         </FormItem>
                       )}
                     />
+
+                    {/* Referred Person Name */}
+                    <FormField
+                      control={form.control}
+                      name="referredPersonName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-base font-semibold">
+                            {isEasyRead ? "Name of the person you want help for" : "Referred Person's Name"} <span className="text-destructive">*</span>
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder={isEasyRead ? "Write their name here" : "Enter referred person's name"}
+                              className="min-h-12"
+                              data-testid="input-referred-name"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Can Collect DOB */}
+                    <FormField
+                      control={form.control}
+                      name="canCollectDOB"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-base font-semibold">
+                            {isEasyRead ? "Can we collect the person's date of birth?" : "Can we collect the referred person's Date of Birth?"} <span className="text-destructive">*</span>
+                          </FormLabel>
+                          <FormControl>
+                            <Select
+                              onValueChange={(v: string) => {
+                                field.onChange(v);
+                                // reset dependent fields
+                                if (v === "yes") {
+                                  form.setValue("ageGroup", undefined);
+                                } else {
+                                  form.setValue("dob", undefined);
+                                }
+                              }}
+                              value={String(field.value ?? "")}
+                            >
+                              <SelectTrigger className="min-h-12">
+                                <SelectValue placeholder={isEasyRead ? "Choose one" : "Choose yes or no"} />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="yes">{isEasyRead ? "Yes" : "Yes - collect DOB"}</SelectItem>
+                                <SelectItem value="no">{isEasyRead ? "No" : "No - cannot collect DOB"}</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Conditionally show DOB or Age Group */}
+                    {canCollect ? (
+                      <FormField
+                        control={form.control}
+                        name="dob"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-base font-semibold">{isEasyRead ? "Their date of birth (day, month, year)" : "Date of Birth"}</FormLabel>
+                            <FormControl>
+                              <Input type="date" className="min-h-12" data-testid="input-dob" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    ) : (
+                      <FormField
+                        control={form.control}
+                        name="ageGroup"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-base font-semibold">
+                              {isEasyRead ? "Are they over or under 18?" : "Age Group"} <span className="text-destructive">*</span>
+                            </FormLabel>
+                            <FormControl>
+                              <Select onValueChange={(v: string) => field.onChange(v)} value={String(field.value ?? "")}>
+                                <SelectTrigger className="min-h-12" data-testid="select-age-group">
+                                  <SelectValue placeholder={isEasyRead ? "Choose one" : "Select age group"} />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="under18">{isEasyRead ? "Under 18" : "Under 18"}</SelectItem>
+                                  <SelectItem value="over18">{isEasyRead ? "Over 18" : "Over 18"}</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    )}
 
                     {/* Email Field */}
                     <FormField
@@ -202,13 +338,7 @@ export default function Referrals() {
                             {isEasyRead ? "Phone Number" : "Contact Number"} <span className="text-destructive">*</span>
                           </FormLabel>
                           <FormControl>
-                            <Input
-                              type="tel"
-                              placeholder={isEasyRead ? "01234 567890" : "Enter phone number"}
-                              className="min-h-12"
-                              data-testid="input-phone"
-                              {...field}
-                            />
+                            <Input type="tel" placeholder={isEasyRead ? "01234 567890" : "Enter phone number"} className="min-h-12" data-testid="input-phone" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -224,31 +354,19 @@ export default function Referrals() {
                           <FormLabel className="text-base font-semibold">
                             {isEasyRead ? "How Did You Hear About Us?" : "Referral Source"} <span className="text-destructive">*</span>
                           </FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value}>
+                          <Select onValueChange={field.onChange} value={String(field.value ?? "")}>
                             <FormControl>
                               <SelectTrigger className="min-h-12" data-testid="select-referral-source">
                                 <SelectValue placeholder={isEasyRead ? "Choose one" : "Select referral source"} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="family">
-                                {isEasyRead ? "Family or Friend" : "Family Member"}
-                              </SelectItem>
-                              <SelectItem value="carer">
-                                {isEasyRead ? "Someone Who Helps Me" : "Carer"}
-                              </SelectItem>
-                              <SelectItem value="social-worker">
-                                {isEasyRead ? "Social Worker" : "Social Worker"}
-                              </SelectItem>
-                              <SelectItem value="healthcare">
-                                {isEasyRead ? "Doctor or Nurse" : "Healthcare Professional"}
-                              </SelectItem>
-                              <SelectItem value="self">
-                                {isEasyRead ? "Myself" : "Self-Referral"}
-                              </SelectItem>
-                              <SelectItem value="other">
-                                {isEasyRead ? "Other" : "Other"}
-                              </SelectItem>
+                              <SelectItem value="family">{isEasyRead ? "Family or Friend" : "Family Member"}</SelectItem>
+                              <SelectItem value="carer">{isEasyRead ? "Someone Who Helps Me" : "Carer"}</SelectItem>
+                              <SelectItem value="social-worker">{isEasyRead ? "Social Worker" : "Social Worker"}</SelectItem>
+                              <SelectItem value="healthcare">{isEasyRead ? "Doctor or Nurse" : "Healthcare Professional"}</SelectItem>
+                              <SelectItem value="self">{isEasyRead ? "Myself" : "Self-Referral"}</SelectItem>
+                              <SelectItem value="other">{isEasyRead ? "Other" : "Other"}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -272,9 +390,7 @@ export default function Referrals() {
                           </FormDescription>
                           <FormControl>
                             <Textarea
-                              placeholder={isEasyRead
-                                ? "Example: John is 25 years old. He has autism. He would like help with cooking and making friends."
-                                : "Describe the individual's needs, abilities, and support requirements..."}
+                              placeholder={isEasyRead ? "Example: John is 25 years old. He has autism. He would like help with cooking and making friends." : "Describe the individual's needs, abilities, and support requirements..."}
                               rows={6}
                               className="resize-none"
                               data-testid="textarea-needs"
@@ -296,16 +412,7 @@ export default function Referrals() {
                             {isEasyRead ? "Anything Else?" : "Additional Notes"} {isEasyRead ? "(If you want)" : "(Optional)"}
                           </FormLabel>
                           <FormControl>
-                            <Textarea
-                              placeholder={isEasyRead
-                                ? "Any other information you want to tell us"
-                                : "Any other information that would help us provide better support"}
-                              rows={4}
-                              className="resize-none"
-                              data-testid="textarea-notes"
-                              {...field}
-                              value={field.value || ""}
-                            />
+                            <Textarea placeholder={isEasyRead ? "Any other information you want to tell us" : "Any other information that would help us provide better support"} rows={4} className="resize-none" data-testid="textarea-notes" {...field} value={field.value || ""} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -314,16 +421,8 @@ export default function Referrals() {
 
                     {/* Submit Button */}
                     <div className="pt-4">
-                      <Button
-                        type="submit"
-                        size="lg"
-                        className="w-full"
-                        disabled={submitMutation.isPending}
-                        data-testid="button-submit-referral"
-                      >
-                        {submitMutation.isPending
-                          ? (isEasyRead ? "Sending..." : "Submitting...")
-                          : (isEasyRead ? "Send Form" : "Submit Referral")}
+                      <Button type="submit" size="lg" className="w-full" disabled={submitMutation.isPending} data-testid="button-submit-referral">
+                        {submitMutation.isPending ? (isEasyRead ? "Sending..." : "Submitting...") : isEasyRead ? "Send Form" : "Submit Referral"}
                       </Button>
                     </div>
 
@@ -337,7 +436,10 @@ export default function Referrals() {
                       ) : (
                         <>
                           By submitting this form, you consent to Purple Patch Partners contacting you regarding this referral. We respect your privacy and will handle your information in accordance with our{" "}
-                          <a href="#" className="text-primary hover:underline">privacy policy</a>.
+                          <a href="#" className="text-primary hover:underline">
+                            privacy policy
+                          </a>
+                          .
                         </>
                       )}
                     </p>
@@ -352,12 +454,8 @@ export default function Referrals() {
             <Card data-testid="card-contact-phone">
               <CardContent className="p-6 space-y-3">
                 <Phone className="h-8 w-8 text-primary" aria-hidden="true" />
-                <h3 className="font-heading font-semibold text-lg">
-                  {isEasyRead ? "Call Us" : "Phone"}
-                </h3>
-                <p className="text-muted-foreground">
-                  {isEasyRead ? "You can call us if you prefer talking on the phone." : "Prefer to speak to someone directly?"}
-                </p>
+                <h3 className="font-heading font-semibold text-lg">{isEasyRead ? "Call Us" : "Phone"}</h3>
+                <p className="text-muted-foreground">{isEasyRead ? "You can call us if you prefer talking on the phone." : "Prefer to speak to someone directly?"}</p>
                 <a href="tel:01234567890" className="text-primary font-semibold hover:underline" data-testid="link-phone">
                   01234 567890
                 </a>
@@ -367,12 +465,8 @@ export default function Referrals() {
             <Card data-testid="card-contact-email">
               <CardContent className="p-6 space-y-3">
                 <Mail className="h-8 w-8 text-primary" aria-hidden="true" />
-                <h3 className="font-heading font-semibold text-lg">
-                  {isEasyRead ? "Email Us" : "Email"}
-                </h3>
-                <p className="text-muted-foreground">
-                  {isEasyRead ? "You can send us an email too." : "Send us an email with your questions."}
-                </p>
+                <h3 className="font-heading font-semibold text-lg">{isEasyRead ? "Email Us" : "Email"}</h3>
+                <p className="text-muted-foreground">{isEasyRead ? "You can send us an email too." : "Send us an email with your questions."}</p>
                 <a href="mailto:info@purplepatchpartners.co.uk" className="text-primary font-semibold hover:underline break-all" data-testid="link-email">
                   info@purplepatchpartners.co.uk
                 </a>

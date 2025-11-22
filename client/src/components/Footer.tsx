@@ -58,34 +58,54 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
-          <div className="space-y-4">
-            <h3 className="font-heading font-semibold text-card-foreground">
-              {isEasyRead ? "Quick Links" : "Quick Links"}
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/services" className="text-sm text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-services">
-                  {isEasyRead ? "What We Do" : "Our Services"}
-                </Link>
-              </li>
-              <li>
-                <Link href="/referrals" className="text-sm text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-referrals">
-                  {isEasyRead ? "Get Help" : "Make a Referral"}
-                </Link>
-              </li>
-              <li>
-                <Link href="/gallery" className="text-sm text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-gallery">
-                  {isEasyRead ? "Pictures" : "Gallery"}
-                </Link>
-              </li>
-              <li>
-                <Link href="/stories" className="text-sm text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-stories">
-                  {isEasyRead ? "Happy Stories" : "Success Stories"}
-                </Link>
-              </li>
-            </ul>
-          </div>
+{/* Column 2: Quick Links */}
+<div className="space-y-4">
+  <h3 className="font-heading font-semibold text-card-foreground">
+    {isEasyRead ? "Quick Links" : "Quick Links"}
+  </h3>
+  <ul className="space-y-2">
+    <li>
+      <Link
+        href="/services"
+        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+        data-testid="link-footer-services"
+      >
+        {isEasyRead ? "What We Do" : "Our Services"}
+      </Link>
+    </li>
+
+    <li>
+      <Link
+        href="/contact"
+        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+        data-testid="link-footer-contact"
+      >
+        {isEasyRead ? "Talk To Us" : "Contact Us"}
+      </Link>
+    </li>
+
+    <li>
+      <Link
+        href="/gallery"
+        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+        data-testid="link-footer-gallery"
+      >
+        {isEasyRead ? "Pictures" : "Gallery"}
+      </Link>
+    </li>
+
+    <li>
+      <Link
+        href="/stories"
+        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+        data-testid="link-footer-stories"
+      >
+        {isEasyRead ? "Happy Stories" : "Success Stories"}
+      </Link>
+    </li>
+  </ul>
+</div>
+
 
           {/* Column 3: Information */}
           <div className="space-y-4">
@@ -95,7 +115,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="/mission" className="text-sm text-muted-foreground hover:text-primary transition-colors" data-testid="link-footer-mission">
-                  {isEasyRead ? "Our Mission" : "Mission & Values"}
+                  {isEasyRead ? "Our Mission" : "Ethos & Values"}
                 </Link>
               </li>
               <li>

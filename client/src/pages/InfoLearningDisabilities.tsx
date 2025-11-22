@@ -181,7 +181,7 @@ export default function InfoLearningDisabilities() {
                         <>
                           Purple Patch Partners provides comprehensive, person-centered support for individuals with learning disabilities, including:
                           <br /><br />
-                          • Personalized daily activity programs
+                          • Personalised daily activity programs
                           <br />
                           • Life skills development and independence training
                           <br />

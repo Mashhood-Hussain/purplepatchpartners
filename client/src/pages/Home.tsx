@@ -19,7 +19,7 @@ export default function Home() {
       icon: Lightbulb,
       title: "Life Skills Development",
       easyReadTitle: "Learn New Skills",
-      description: "Personalized support to help individuals develop essential life skills for greater independence and community participation.",
+      description: "Personalised support to help individuals develop essential life skills for greater independence and community participation.",
       easyReadDescription: "We help you learn how to do things on your own. Cooking, shopping, and being safe."
     },
     {

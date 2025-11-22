@@ -1,12 +1,12 @@
 {
-  "version": 0,
+  "version": "7",
   "dialect": "postgresql",
   "entries": [
     {
       "idx": 0,
       "version": "7",
-      "when": 1761963211755,
-      "tag": "0000_short_sinister_six",
+      "when": 1763836884230,
+      "tag": "0000_talented_whistler",
       "breakpoints": true
     }
   ]
