@@ -19,6 +19,7 @@ import NotFound from "@/pages/not-found";
 import TeamPage from "./pages/Team";
 import NewsPage from "./pages/News";
 import ContactPage from "./pages/Contact"
+import VacanciesPage from "@/pages/vacancies";
 
 
 
@@ -38,6 +39,7 @@ function Router() {
       <Route path="/team" component={TeamPage} />
       <Route path="/news" component={NewsPage} />
       <Route path="/contact" component={ContactPage} />
+      <Route path="/vacancies" component={VacanciesPage} />
       <Route component={NotFound} />
     </Switch>
   );
