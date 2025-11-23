@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useAccessibility } from "@/contexts/AccessibilityContext";
@@ -6,67 +6,96 @@ import { X } from "lucide-react";
 
 export default function Gallery() {
   const { isEasyRead } = useAccessibility();
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'activities' | 'achievements' | 'events'>('all');
-  const [lightboxImage, setLightboxImage] = useState<{ url: string; title: string } | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<
+    "all" | "activities" | "achievements" | "events"
+  >("all");
+
+  // track index inside filteredItems
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const categories = [
-    { id: 'all', label: 'All', easyReadLabel: 'Everything' },
-    { id: 'activities', label: 'Daily Activities', easyReadLabel: 'Activities' },
-    { id: 'achievements', label: 'Achievements', easyReadLabel: 'Proud Moments' },
-    { id: 'events', label: 'Events', easyReadLabel: 'Special Days' },
+    { id: "all", label: "All", easyReadLabel: "Everything" },
+    { id: "activities", label: "Daily Activities", easyReadLabel: "Activities" },
+    { id: "achievements", label: "Achievements", easyReadLabel: "Proud Moments" },
+    { id: "events", label: "Events", easyReadLabel: "Special Days" },
   ];
 
   const galleryItems = [
     {
       url: "/images/01.jpg",
-      title: isEasyRead ? "Art Class" : "Creative Arts Workshop",
-      category: 'activities'
+      title: isEasyRead ? "Talking with People" : "Social Interaction",
+      category: "activities",
     },
     {
       url: "/images/05.jpg",
-      title: isEasyRead ? "Cooking Together" : "Cooking Skills Development",
-      category: 'activities'
+      title: isEasyRead ? "Staying Healthy" : "Health and Wellbeing",
+      category: "activities",
     },
     {
       url: "/images/06.jpg",
-      title: isEasyRead ? "Computer Learning" : "Technology Training",
-      category: 'activities'
+      title: isEasyRead ? "Learning New Things" : "Learning and Development",
+      category: "activities",
     },
     {
       url: "/images/07.jpg",
-      title: isEasyRead ? "Making Friends" : "Social Engagement",
-      category: 'activities'
+      title: isEasyRead ? "Making Friends" : "Cultural Community",
+      category: "activities",
     },
     {
       url: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&h=600&fit=crop",
-      title: isEasyRead ? "Certificate Day" : "Achievement Ceremony",
-      category: 'achievements'
+      title: isEasyRead ? "Relaxing" : "Relaxation & Leisure",
+      category: "activities",
     },
     {
       url: "/images/08.jpg",
       title: isEasyRead ? "Graduation" : "Skill Development Graduation",
-      category: 'achievements'
+      category: "achievements",
     },
     {
       url: "https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=800&h=600&fit=crop",
       title: isEasyRead ? "Party Time" : "Community Celebration",
-      category: 'events'
+      category: "events",
     },
     {
       url: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=600&fit=crop",
       title: isEasyRead ? "Fun Day Out" : "Community Outing",
-      category: 'events'
+      category: "events",
     },
     {
       url: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&h=600&fit=crop",
       title: isEasyRead ? "Team Meeting" : "Group Discussion",
-      category: 'activities'
+      category: "activities",
     },
   ];
 
-  const filteredItems = selectedCategory === 'all'
-    ? galleryItems
-    : galleryItems.filter(item => item.category === selectedCategory);
+  const filteredItems =
+    selectedCategory === "all"
+      ? galleryItems
+      : galleryItems.filter((item) => item.category === selectedCategory);
+
+  // Next / Previous navigation
+  const openNext = () => {
+    if (lightboxIndex === null) return;
+    setLightboxIndex((lightboxIndex + 1) % filteredItems.length);
+  };
+
+  const openPrev = () => {
+    if (lightboxIndex === null) return;
+    setLightboxIndex((lightboxIndex - 1 + filteredItems.length) % filteredItems.length);
+  };
+
+  // Keyboard support
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (lightboxIndex === null) return;
+      if (e.key === "ArrowRight") openNext();
+      if (e.key === "ArrowLeft") openPrev();
+      if (e.key === "Escape") setLightboxIndex(null);
+    };
+
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [lightboxIndex]);
 
   return (
     <div className="flex flex-col">
@@ -82,8 +111,8 @@ export default function Gallery() {
                 ? "See what we do every day. Look at our fun activities and happy moments!"
                 : "Explore our collection of photos and videos showcasing daily activities, achievements, and community events."}
             </p>
-            <br></br>
-            <br></br>
+            <br />
+            <br />
             <p> Timeline video of story book would be here maybe? </p>
           </div>
         </div>
@@ -112,7 +141,7 @@ export default function Gallery() {
               <Card
                 key={index}
                 className="overflow-hidden hover-elevate active-elevate-2 cursor-pointer"
-                onClick={() => setLightboxImage({ url: item.url, title: item.title })}
+                onClick={() => setLightboxIndex(index)}
                 data-testid={`card-gallery-${index}`}
               >
                 <CardContent className="p-0">
@@ -152,37 +181,64 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* Lightbox */}
-      {lightboxImage && (
+      {/* Lightbox with Left/Right Scrolling */}
+      {lightboxIndex !== null && (
         <div
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setLightboxImage(null)}
+          onClick={() => setLightboxIndex(null)}
           role="dialog"
           aria-modal="true"
           aria-label="Image lightbox"
           data-testid="lightbox"
         >
+          {/* Close Button */}
           <Button
             variant="ghost"
             size="icon"
             className="absolute top-4 right-4 text-white hover:bg-white/20"
-            onClick={() => setLightboxImage(null)}
+            onClick={() => setLightboxIndex(null)}
             aria-label="Close lightbox"
             data-testid="button-close-lightbox"
           >
             <X className="h-6 w-6" />
           </Button>
+
+          {/* Previous Button */}
+          <button
+            className="absolute left-4 text-white text-4xl px-4 py-2 hover:bg-white/20 rounded"
+            onClick={(e) => {
+              e.stopPropagation();
+              openPrev();
+            }}
+            aria-label="Previous image"
+          >
+            ‹
+          </button>
+
+          {/* Image */}
           <div className="max-w-5xl w-full" onClick={(e) => e.stopPropagation()}>
             <img
-              src={lightboxImage.url}
-              alt={lightboxImage.title}
+              src={filteredItems[lightboxIndex].url}
+              alt={filteredItems[lightboxIndex].title}
               className="w-full h-auto rounded-lg"
               data-testid="img-lightbox"
             />
             <p className="text-white text-center mt-4 text-lg font-medium">
-              {lightboxImage.title}
+              {filteredItems[lightboxIndex].title}
             </p>
           </div>
+
+          {/* Next Button */}
+          <button
+            className="absolute right-4 text-white text-4xl px-4 py-2 hover:bg-white/20 rounded"
+            onClick={(e) => {
+              e.stopPropagation();
+              openNext();
+            }}
+            aria-label="Next image"
+          >
+            ›
+          </button>
         </div>
       )}
     </div>
