@@ -1,7 +1,16 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Users, Shield, Star } from "lucide-react";
+import { Users, Shield, Star } from "lucide-react";
 import { useAccessibility } from "@/contexts/AccessibilityContext";
 import { useState } from "react";
+
+// Custom Icon Component for Purple Patch Logo
+const PurpleLogoIcon = () => (
+  <img
+    src="/images/purplelogo.png"
+    alt="Purple Patch Partners logo with tagline"
+    className="h-10 sm:h-12 object-contain mx-auto"
+  />
+);
 
 // Dropdown Component
 function Dropdown({ title, content }: { title: string; content: string }) {
@@ -31,7 +40,7 @@ export default function Mission() {
 
   const values = [
     {
-      icon: Heart,
+      icon: PurpleLogoIcon,
       title: "Inclusion",
       easyReadTitle: "Everyone Belongs",
       description:
