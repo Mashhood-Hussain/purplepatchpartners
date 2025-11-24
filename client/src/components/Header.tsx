@@ -194,51 +194,68 @@ export function Header() {
 
         {/* MOBILE MENU */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-border bg-background">
+          <div className="lg:hidden border-t border-border bg-background relative z-20">
             <div className="container mx-auto px-2 py-4 space-y-1">
 
-              {navigationItems.map((item, idx) =>
-                item.isDropdown ? (
-                  <div key={idx}>
+             {navigationItems.map((item, idx) =>
+  item.isDropdown ? (
+    <div key={idx} className="w-full">
 
-                    {/* MAIN DROPDOWN BUTTON */}
-                    <button
-                      onClick={() => setMobileDropdownOpen(mobileDropdownOpen === idx ? null : idx)}
-                      className="w-full flex items-center justify-between text-left px-3 py-3 text-base font-medium hover:bg-primary/10 rounded-md"
-                    >
-                      {isEasyRead ? item.easyReadLabel : item.label}
-                      <span className="translate-y-[1px]">
-                        {mobileDropdownOpen === idx ? "▾" : "▸"}
-                      </span>
-                    </button>
+      {/* TOP ROW: MAIN LINK + TOGGLE BUTTON */}
+      <div className="flex items-center justify-between">
+        
+        {/* MAIN LINK */}
+        <Link
+          href={item.path}
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="flex-1 px-4 py-3 text-base font-medium rounded-md hover:bg-primary/10 text-left"
+        >
+          {isEasyRead ? item.easyReadLabel : item.label}
+        </Link>
 
-                    {/* MOBILE SUB ITEMS */}
-                    {mobileDropdownOpen === idx && (
-                      <div className="space-y-1 pl-6">
-                        {item.items.map((sub, i) => (
-                          <Link key={i} href={sub.path} onClick={() => setIsMobileMenuOpen(false)}>
-                            <Button
-                              variant={location === sub.path ? "default" : "ghost"}
-                              className="w-full justify-start text-base"
-                            >
-                              {isEasyRead ? sub.easyReadLabel : sub.label}
-                            </Button>
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <Link key={idx} href={item.path} onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button
-                      variant={location === item.path ? "default" : "ghost"}
-                      className="w-full justify-start text-base"
-                    >
-                      {isEasyRead ? item.easyReadLabel : item.label}
-                    </Button>
-                  </Link>
-                )
-              )}
+        {/* DROPDOWN TOGGLE */}
+        <button
+          onClick={() =>
+            setMobileDropdownOpen(mobileDropdownOpen === idx ? null : idx)
+          }
+          className="px-3 py-3"
+        >
+          {mobileDropdownOpen === idx ? "▾" : "▸"}
+        </button>
+      </div>
+
+      {/* SUBMENU */}
+      {mobileDropdownOpen === idx && (
+        <div className="space-y-1 pl-6 mt-1">
+          {item.items.map((sub, i) => (
+            <Link
+              key={i}
+              href={sub.path}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <Button
+                variant={location === sub.path ? "default" : "ghost"}
+                className="w-full justify-start text-base"
+              >
+                {isEasyRead ? sub.easyReadLabel : sub.label}
+              </Button>
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  ) : (
+    <Link key={idx} href={item.path} onClick={() => setIsMobileMenuOpen(false)}>
+      <Button
+        variant={location === item.path ? "default" : "ghost"}
+        className="w-full justify-start text-base"
+      >
+        {isEasyRead ? item.easyReadLabel : item.label}
+      </Button>
+    </Link>
+  )
+)}
+
 
               {/* Refer Button */}
               <Link href="/referrals" onClick={() => setIsMobileMenuOpen(false)}>
