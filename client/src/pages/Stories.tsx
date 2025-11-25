@@ -6,20 +6,20 @@ export default function Stories() {
   const { isEasyRead } = useAccessibility();
 
   const featuredStory = {
-    name: "Emma",
+    name: "Fatima",
     age: 28,
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=600&fit=crop",
     quote: isEasyRead
       ? "I was shy before. Now I have friends and I can cook!"
       : "When I first came to Purple Patch Partners, I struggled with confidence and independence. Now I've developed cooking skills, made wonderful friends, and feel proud of what I can achieve.",
     story: isEasyRead
-      ? "Emma came to us 2 years ago. She was very quiet and did not talk much. She did not know how to cook. Now Emma loves cooking class! She makes lunch for everyone. She has lots of friends. Emma smiles every day. We are so proud of Emma!"
-      : "Emma joined Purple Patch Partners two years ago, initially struggling with social anxiety and lacking basic life skills. Through our structured support programs and encouraging environment, she discovered a passion for cooking. Today, Emma regularly prepares meals for her peers, has developed strong friendships within the community, and radiates confidence. Her transformation demonstrates the power of person-centered support and belief in individual potential.",
+      ? "Fatima came to us 2 years ago. She was very quiet and did not talk much. She did not know how to cook. Now Fatima loves cooking class! She makes lunch for everyone. She has lots of friends. Fatima smiles every day. We are so proud of Fatima!"
+      : "Fatima joined Purple Patch Partners two years ago, initially struggling with social anxiety and lacking basic life skills. Through our structured support programs and encouraging environment, she discovered a passion for cooking. Today, Fatima regularly prepares meals for her peers, has developed strong friendships within the community, and radiates confidence. Her transformation demonstrates the power of person-centered support and belief in individual potential.",
   };
 
   const successStories = [
     {
-      name: "Michael",
+      name: "Abu Bakr",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
       quote: isEasyRead
         ? "I learned to use the bus by myself. I feel like a grown-up!"
@@ -35,7 +35,7 @@ export default function Stories() {
       achievement: isEasyRead ? "Won art competition" : "Artistic development"
     },
     {
-      name: "Daniel",
+      name: "Raf",
       image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
       quote: isEasyRead
         ? "I help with the garden now. I know all the plant names!"
