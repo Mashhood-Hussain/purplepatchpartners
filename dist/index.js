@@ -128,6 +128,8 @@ import ws from "ws";
 // shared/schema.ts
 var schema_exports = {};
 __export(schema_exports, {
+  contact_messages: () => contact_messages,
+  insertContactSchema: () => insertContactSchema,
   insertReferralSchema: () => insertReferralSchema,
   referrals: () => referrals
 });
@@ -139,30 +141,75 @@ var referrals = pgTable(
   "referrals",
   {
     id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+    // Existing fields
     name: text("name").notNull(),
     email: text("email").notNull(),
     phone: text("phone").notNull(),
     needsAssessment: text("needs_assessment").notNull(),
     referralSource: text("referral_source").notNull(),
     additionalNotes: text("additional_notes"),
+    // GDPR-compliant fields
+    guardianName: text("guardian_name").notNull(),
+    referredPersonName: text("referred_person_name").notNull(),
+    canCollectDOB: text("can_collect_dob").notNull(),
+    // "yes"/"no"
+    dob: text("dob"),
+    // optional if canCollectDOB = yes
+    ageGroup: text("age_group"),
+    // optional if canCollectDOB = no
     createdAt: timestamp("created_at").defaultNow().notNull()
   },
   (table) => ({
-    // Add helpful indexes
     emailIdx: index("idx_referrals_email").on(table.email),
     createdAtIdx: index("idx_referrals_created_at").on(table.createdAt)
   })
 );
-var insertReferralSchema = createInsertSchema(referrals).omit({
-  id: true,
-  createdAt: true
-}).extend({
+var insertReferralSchema = createInsertSchema(referrals).omit({ id: true, createdAt: true }).extend({
   email: z.string().email("Please enter a valid email address"),
   phone: z.string().min(10, "Please enter a valid phone number"),
   needsAssessment: z.string().min(
     50,
     "Please provide detailed information about the needs (at least 50 characters)"
-  )
+  ),
+  guardianName: z.string().min(2, "Guardian name is required"),
+  referredPersonName: z.string().min(2, "Please enter the referred person's name"),
+  canCollectDOB: z.enum(["yes", "no"], { required_error: "Please select if DOB can be collected" }),
+  dob: z.string().optional(),
+  ageGroup: z.enum(["under18", "over18"]).optional()
+}).superRefine((data, ctx) => {
+  if (data.canCollectDOB === "yes" && !data.dob) {
+    ctx.addIssue({
+      code: "custom",
+      message: "Date of birth is required if it can be collected",
+      path: ["dob"]
+    });
+  }
+  if (data.canCollectDOB === "no" && !data.ageGroup) {
+    ctx.addIssue({
+      code: "custom",
+      message: "Please select whether the referred person is over or under 18",
+      path: ["ageGroup"]
+    });
+  }
+});
+var contact_messages = pgTable(
+  "contact_messages",
+  {
+    id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+    name: text("name").notNull(),
+    email: text("email").notNull(),
+    message: text("message").notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull()
+  },
+  (table) => ({
+    emailIdx: index("idx_contact_email").on(table.email),
+    createdAtIdx: index("idx_contact_created_at").on(table.createdAt)
+  })
+);
+var insertContactSchema = createInsertSchema(contact_messages).omit({ id: true, createdAt: true }).extend({
+  name: z.string().min(2, "Please enter your name"),
+  email: z.string().email("Please enter a valid email address"),
+  message: z.string().min(10, "Message must be at least 10 characters")
 });
 
 // server/db.ts
@@ -177,14 +224,8 @@ var db = drizzle({ client: pool, schema: schema_exports });
 
 // server/routes.ts
 import { z as z2 } from "zod";
-var referralSchema = z2.object({
-  name: z2.string().min(2),
-  email: z2.string().email(),
-  phone: z2.string().min(8),
-  needsAssessment: z2.string().min(50),
-  referralSource: z2.string().min(2),
-  additionalNotes: z2.string().optional()
-});
+var referralSchema = insertReferralSchema;
+var contactSchema = insertContactSchema;
 function registerRoutes(app2) {
   app2.post("/api/referrals", async (req, res) => {
     try {
@@ -209,8 +250,44 @@ function registerRoutes(app2) {
     }
   });
   app2.get("/api/referrals", async (_req, res) => {
-    const list = await db.select().from(referrals);
-    res.json(list);
+    try {
+      const list = await db.select().from(referrals);
+      res.json(list);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: "Database error" });
+    }
+  });
+  app2.post("/api/contact", async (req, res) => {
+    try {
+      const parsed = contactSchema.parse(req.body);
+      await db.insert(contact_messages).values(parsed);
+      return res.json({
+        success: true,
+        message: "Message sent successfully"
+      });
+    } catch (err) {
+      if (err instanceof z2.ZodError) {
+        return res.status(400).json({
+          success: false,
+          errors: err.errors
+        });
+      }
+      console.error(err);
+      return res.status(500).json({
+        success: false,
+        message: "Database error"
+      });
+    }
+  });
+  app2.get("/api/contact", async (_req, res) => {
+    try {
+      const list = await db.select().from(contact_messages);
+      res.json(list);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: "Database error" });
+    }
   });
 }
 

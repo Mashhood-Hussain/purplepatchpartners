@@ -6,7 +6,7 @@ export default function TeamPage() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-3">Founder - Rafik</h2>
         <img
-          src="/images/man.png"
+          src="/images/rafikbhaifacepic.jpg"
           alt="Founder"
           className="w-48 h-48 object-cover rounded-lg mb-4"
         />
@@ -22,8 +22,8 @@ export default function TeamPage() {
           {/* Staff Profile */}
           <div className="p-4 border rounded-lg">
             <img
-              src="/images/man.png"
-              className="w-full h-48 object-cover rounded-md mb-3"
+              src="/images/otherguyface.jpg"
+              className="w-48 h-48 object-cover rounded-lg mb-4"
               alt="Staff Member"
             />
             <h3 className="text-xl font-semibold">Staff Name</h3>
