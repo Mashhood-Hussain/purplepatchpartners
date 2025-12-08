@@ -4,6 +4,126 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Users, Lightbulb, Target, ArrowRight, Smile, BookOpen, Paintbrush } from "lucide-react";
 import { useAccessibility } from "@/contexts/AccessibilityContext";
 
+import { useState, useEffect } from "react";
+
+function Slideshow() {
+  const images = [
+    "01.jpg",
+    "archerypic1.jpg",
+    "archiesgrouppicture.jpeg",
+    "artsandcraftpic2.jpg",
+    "artsandcraftpic3.jpg",
+    "artsandcraftpic4outside.jpg",
+    "artsandcraftpic5.jpg",
+    "artsandcraftsposterpic.jpg",
+    "blackburngrandvenuepic.jpeg",
+    "blackpoolbeachpic1.jpg",
+    "blackpoolbeachpic2.jpg",
+    "britaininbloomnorthwestawardceremony.jpeg",
+    "cathedralgardemanchester.jpg",
+    "certificateofindoorsskydiving.jpg",
+    "christmancostumepic.jpg",
+    "cleaningleavesfromtheroadpic.jpg",
+    "cookinghappypic.jpg",
+    "cookingpic1.jpg",
+    "cookingpic2.jpg",
+    "cookingpic3.jpg",
+    "cookingpic4.jpg",
+    "cookingpic5.jpg",
+    "cookingpic6.jpg",
+    "craftprojectcoursecertificatepic.jpg",
+    "craftprojectcoursecertificatepic2.jpg",
+    "craftprojectcoursecertificatepic3.jpg",
+    "craftprojectcoursecertificatepic4.jpg",
+    "craftprojectcoursecertificatepic5.jpg",
+    "cricketpic1.jpg",
+    "diggingsandpic.jpg",
+    "eatingfoodinrestaurantpic1.jpg",
+    "flyingmanindoorskydivingpic1.jpg",
+    "flyingmanindoorskydivingpic2.jpg",
+    "footballpic1.jpg",
+    "gardeningpic1.jpg",
+    "gardeningpic2.jpg",
+    "gardeningpic3.jpg",
+    "gardeningpic4.jpg",
+    "goingtoalpacafarmpic1.jpg",
+    "goingtoalpacafarmpic2.jpg",
+    "alpacafarmpic3.jpg",
+    "golfpic1.jpg",
+    "artsandcraftpic1.jpg",
+    "happysmilepic1.jpg",
+    "happysmilepic2.jpg",
+    "happysmilepic3.jpg",
+    "happysmilepic4.jpg",
+    "highlandcowpic2.jpg",
+    "hooveringpic1.jpg",
+    "kitchenpic1.jpg",
+    "learningboarddressactivitygamepic.jpg",
+    "learningpic1.jpg",
+    "meetingasheeppic1.jpg",
+    "meetingblackburnroversmascot.jpg",
+    "meetinghighlandcowpic.jpg",
+    "mehndidesignonhand1.jpg",
+    "nasheedproductionpic1.jpg",
+    "ontheswingpic.jpg",
+    "ontheswingpic2.jpg",
+    "playingbowlingpic1.jpg",
+    "playingbowlingpic2.jpg",
+    "playingludogamepic.jpg",
+    "playingpuzzlegame.jpg",
+    "playingVRpic.jpg",
+    "prayermatdrawingarts&craft.jpg",
+    "promotingpurplepathpic.jpg",
+    "purplepatchkeychainsmadeinartsandcraft.jpg",
+    "readingpic1.jpg",
+    "ridingtricyclepic.jpg",
+    "scoutspic1.jpg",
+    "sellingitemstoraisemoneyforcharitypic.jpeg",
+    "sensoryplaypic1.jpg",
+    "sharingpic.jpg",
+    "skydivinggrouppic1.jpg",
+    "skydivinggrouppic2.jpg",
+    "visitingblackburncathedralpic.jpg",
+    "waterplaygamepic1.jpg",
+    "waterplaygamepic2.jpg",
+    "wheelchairbasketballpic1.jpg",
+    "wheelchairbasketballpic2.jpg",
+    "wheelchairwomenpic.jpg",
+    "woodsandcraftoutsidepic.jpg",
+    "woodsandcraftoutsidepic2.jpg",
+  ];
+
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % images.length);
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+<div className="relative w-full h-[500px] md:h-[530px] overflow-hidden rounded-xl shadow-xl">
+
+  {/* Blurred background */}
+  <img
+    src={`/images/${images[index]}`}
+    alt="Background blurred"
+    className="absolute inset-0 w-full h-full object-cover blur-xl scale-110 opacity-70"
+  />
+
+  {/* Main image, fully visible */}
+  <img
+    src={`/images/${images[index]}`}
+    alt="Activity slideshow"
+    className="absolute inset-0 m-auto max-w-full max-h-full object-contain"
+  />
+</div>
+
+  );
+}
+
 export default function Home() {
   const { isEasyRead } = useAccessibility();
 
@@ -82,12 +202,7 @@ export default function Home() {
               </div>
             </div>
             <div className="relative">
-              <img
-                src="/images/02.jpg"
-                alt={isEasyRead ? "Happy people learning together" : "Diverse group of people engaging in activities together"}
-                className="rounded-xl shadow-xl w-full"
-                data-testid="img-hero"
-              />
+                  <Slideshow />
             </div>
           </div>
         </div>

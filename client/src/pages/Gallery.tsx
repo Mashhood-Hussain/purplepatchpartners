@@ -22,7 +22,7 @@ export default function Gallery() {
 
   const galleryItems = [
     {
-      url: "/images/01.jpg",
+      url: "/images/cricketpic1.jpg",
       title: isEasyRead ? "Talking with People" : "Social Interaction",
       category: "activities",
     },
@@ -32,7 +32,7 @@ export default function Gallery() {
       category: "activities",
     },
     {
-      url: "/images/06.jpg",
+      url: "/images/learningpic1.jpg",
       title: isEasyRead ? "Learning New Things" : "Learning and Development",
       category: "activities",
     },
@@ -42,12 +42,12 @@ export default function Gallery() {
       category: "activities",
     },
     {
-      url: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&h=600&fit=crop",
+      url: "/images/blackpoolbeachpic2.jpg",
       title: isEasyRead ? "Relaxing" : "Relaxation & Leisure",
       category: "activities",
     },
     {
-      url: "/images/08.jpg",
+      url: "/images/skydivinggrouppic.jpg",
       title: isEasyRead ? "Graduation" : "Skill Development Graduation",
       category: "achievements",
     },
