@@ -48,24 +48,12 @@ export default function Gallery() {
     },
     {
       url: "/images/skydivinggrouppic.jpg",
-      title: isEasyRead ? "Graduation" : "Skill Development Graduation",
-      category: "achievements",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=800&h=600&fit=crop",
-      title: isEasyRead ? "Party Time" : "Community Celebration",
-      category: "events",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=600&fit=crop",
       title: isEasyRead ? "Fun Day Out" : "Community Outing",
       category: "events",
     },
-    {
-      url: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&h=600&fit=crop",
-      title: isEasyRead ? "Team Meeting" : "Group Discussion",
-      category: "activities",
-    },
+
+
+    
   ];
 
   const filteredItems =
