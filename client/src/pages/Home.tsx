@@ -57,22 +57,35 @@ function Slideshow() {
     "woodsandcraftoutsidepic2.jpg",
   ];
 
-  const [index, setIndex] = useState(0);
+const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
     }, 3000);
-
     return () => clearInterval(timer);
   }, []);
 
   return (
     <div className="relative w-full h-[500px] md:h-[530px] overflow-hidden rounded-xl shadow-xl">
+
+      {/* Blurred background (mobile only) */}
+      <img
+        src={`/images/${images[index]}`}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-60 md:hidden"
+      />
+
+      {/* Main slideshow image */}
       <img
         src={`/images/${images[index]}`}
         alt="Activity slideshow"
-        className="w-full h-full object-cover transition-opacity duration-700"
+        className="
+          relative z-10 w-full h-full
+          object-contain    /* mobile shows full image */
+          md:object-cover   /* desktop fills the frame */
+          transition-opacity duration-700
+        "
       />
     </div>
   );
