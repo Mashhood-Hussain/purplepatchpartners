@@ -177,19 +177,6 @@ export default function Contact() {
       Former St Mary's College, Shear Brow, Blackburn BB1 8DS <br />
     </p>
   </div>
-
-  <div className="flex flex-col items-center space-y-6 mt-8">
-    <img
-      src="/images/committed_small.png"
-      alt="Committed"
-      className="w-40 h-auto rounded-lg shadow-lg"
-    />
-    <img
-      src="/images/Winner Logo BMA 2020-01.jpg"
-      alt="Award Logo"
-      className="w-40 h-auto rounded-lg shadow-lg"
-    />
-  </div>
 </section>
 
       </div>

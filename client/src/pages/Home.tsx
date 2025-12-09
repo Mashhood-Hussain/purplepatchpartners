@@ -11,84 +11,48 @@ function Slideshow() {
     "01.jpg",
     "archerypic1.jpg",
     "archiesgrouppicture.jpeg",
-    "artsandcraftpic2.jpg",
-    "artsandcraftpic3.jpg",
-    "artsandcraftpic4outside.jpg",
-    "artsandcraftpic5.jpg",
-    "artsandcraftsposterpic.jpg",
-    "blackburngrandvenuepic.jpeg",
+    "artsandcraftpic4outside.jpg", 
     "blackpoolbeachpic1.jpg",
     "blackpoolbeachpic2.jpg",
     "britaininbloomnorthwestawardceremony.jpeg",
-    "cathedralgardemanchester.jpg",
-    "certificateofindoorsskydiving.jpg",
-    "christmancostumepic.jpg",
+    "cathedralgardenmanchester.jpg",
+    "certificateforindoorskydiving.jpg",
+    "christmasmancostumepic.jpg",
     "cleaningleavesfromtheroadpic.jpg",
-    "cookinghappypic.jpg",
     "cookingpic1.jpg",
-    "cookingpic2.jpg",
     "cookingpic3.jpg",
     "cookingpic4.jpg",
-    "cookingpic5.jpg",
-    "cookingpic6.jpg",
-    "craftprojectcoursecertificatepic.jpg",
     "craftprojectcoursecertificatepic2.jpg",
     "craftprojectcoursecertificatepic3.jpg",
-    "craftprojectcoursecertificatepic4.jpg",
-    "craftprojectcoursecertificatepic5.jpg",
     "cricketpic1.jpg",
     "diggingsandpic.jpg",
-    "eatingfoodinrestaurantpic1.jpg",
-    "flyingmanindoorskydivingpic1.jpg",
+    "skydivinggrouppic.jpg",
+    "skydivinggrouppic2.jpg",
+    "wheelchairwomenpic.jpg",
     "flyingmanindoorskydivingpic2.jpg",
     "footballpic1.jpg",
-    "gardeningpic1.jpg",
-    "gardeningpic2.jpg",
     "gardeningpic3.jpg",
-    "gardeningpic4.jpg",
-    "goingtoalpacafarmpic1.jpg",
+    "goingtoalpacafarmpic.jpg",
     "goingtoalpacafarmpic2.jpg",
     "alpacafarmpic3.jpg",
-    "golfpic1.jpg",
-    "artsandcraftpic1.jpg",
-    "happysmilepic1.jpg",
-    "happysmilepic2.jpg",
-    "happysmilepic3.jpg",
-    "happysmilepic4.jpg",
     "highlandcowpic2.jpg",
-    "hooveringpic1.jpg",
-    "kitchenpic1.jpg",
-    "learningboarddressactivitygamepic.jpg",
     "learningpic1.jpg",
-    "meetingasheeppic1.jpg",
-    "meetingblackburnroversmascot.jpg",
     "meetinghighlandcowpic.jpg",
-    "mehndidesignonhand1.jpg",
     "nasheedproductionpic1.jpg",
-    "ontheswingpic.jpg",
-    "ontheswingpic2.jpg",
-    "playingbowlingpic1.jpg",
+    "playingbowlingpic.jpg",
     "playingbowlingpic2.jpg",
     "playingludogamepic.jpg",
     "playingpuzzlegame.jpg",
-    "playingVRpic.jpg",
-    "prayermatdrawingarts&craft.jpg",
-    "promotingpurplepathpic.jpg",
+    "prayermatdrawingartscraft.jpg",
+    "promotingpurplepatchpic.jpg",
     "purplepatchkeychainsmadeinartsandcraft.jpg",
-    "readingpic1.jpg",
     "ridingtricyclepic.jpg",
     "scoutspic1.jpg",
     "sellingitemstoraisemoneyforcharitypic.jpeg",
     "sensoryplaypic1.jpg",
     "sharingpic.jpg",
-    "skydivinggrouppic1.jpg",
-    "skydivinggrouppic2.jpg",
-    "visitingblackburncathedralpic.jpg",
-    "waterplaygamepic1.jpg",
-    "waterplaygamepic2.jpg",
-    "wheelchairbasketballpic1.jpg",
+    "wheelchairbasketballpic.jpg",
     "wheelchairbasketballpic2.jpg",
-    "wheelchairwomenpic.jpg",
     "woodsandcraftoutsidepic.jpg",
     "woodsandcraftoutsidepic2.jpg",
   ];
@@ -104,23 +68,13 @@ function Slideshow() {
   }, []);
 
   return (
-<div className="relative w-full h-[500px] md:h-[530px] overflow-hidden rounded-xl shadow-xl">
-
-  {/* Blurred background */}
-  <img
-    src={`/images/${images[index]}`}
-    alt="Background blurred"
-    className="absolute inset-0 w-full h-full object-cover blur-xl scale-110 opacity-70"
-  />
-
-  {/* Main image, fully visible */}
-  <img
-    src={`/images/${images[index]}`}
-    alt="Activity slideshow"
-    className="absolute inset-0 m-auto max-w-full max-h-full object-contain"
-  />
-</div>
-
+    <div className="relative w-full h-[500px] md:h-[530px] overflow-hidden rounded-xl shadow-xl">
+      <img
+        src={`/images/${images[index]}`}
+        alt="Activity slideshow"
+        className="w-full h-full object-cover transition-opacity duration-700"
+      />
+    </div>
   );
 }
 
