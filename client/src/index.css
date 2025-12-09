@@ -323,33 +323,63 @@ body.dark.high-contrast-mode {
   padding-bottom: 0.5rem;
 }
 
+.main-nav {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 1.8rem;
+  white-space: nowrap;
+}
+
+
 /* ---------------------------------------- */
 /* Two-Row Navbar for Large Text Mode (DESKTOP ONLY) */
 /* ---------------------------------------- */
 
+/* ---------------------------------------- */
+/* Large Text Mode: Two-row navbar layout   */
+/* ---------------------------------------- */
+
 @media (min-width: 1024px) {
-  .large-text-mode nav[aria-label="Main navigation"] {
+  .large-text-mode nav[aria-label="Main navigation"].main-nav {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;  
-    align-items: center;
-    row-gap: 0.75rem;       
-    column-gap: 1.5rem;     
-    max-width: 100%;
-    text-align: center;
+    justify-content: center;
+    column-gap: 2.8rem;
+    row-gap: 0.8rem;
   }
 
-  .large-text-mode nav[aria-label="Main navigation"] > * {
-    flex: 0 0 auto;
-    white-space: nowrap;
-  }
-
-  .large-text-mode nav[aria-label="Main navigation"] > *:nth-child(-n+4) {
+  /* Row 1: first 4 items */
+  .large-text-mode nav[aria-label="Main navigation"].main-nav > *:nth-child(-n+4) {
     order: 1;
   }
 
-  .large-text-mode nav[aria-label="Main navigation"] > *:nth-child(n+5) {
+  /* Row 2: items 5 onward */
+  .large-text-mode nav[aria-label="Main navigation"].main-nav > *:nth-child(n+5) {
     order: 2;
+  }
+}
+
+.main-nav-shift {
+  margin-left: -2rem;
+  margin-top: 0.5rem;
+}
+
+
+
+/* ============================================
+   Desktop navbar wrapping for normal mode
+   ============================================ */
+@media (min-width: 1024px) {
+  nav[aria-label="Main navigation"] {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.8rem;
+  }
+
+  nav[aria-label="Main navigation"] > * {
+    white-space: nowrap;
   }
 }
 

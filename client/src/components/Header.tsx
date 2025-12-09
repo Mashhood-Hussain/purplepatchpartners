@@ -114,10 +114,16 @@ export function Header() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8 -ml-14" aria-label="Main navigation">
-              {navigationItems.map((item, idx) =>
+<nav
+  className="hidden lg:flex main-nav main-nav-shift"
+  aria-label="Main navigation"
+>
+
+
+
+              {navigationItems.map((item, idx) => 
                 item.isDropdown ? (
-                  <div key={idx} className="relative flex items-center gap-1">
+                  <div key={idx} className="relative flex items-center gap-1 leading-none">
                     
                     {/* MAIN LINK */}
                     <Link
