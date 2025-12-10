@@ -6,70 +6,161 @@ import { X } from "lucide-react";
 
 export default function Gallery() {
   const { isEasyRead } = useAccessibility();
-  const [selectedCategory, setSelectedCategory] = useState<
-    "all" | "activities" | "achievements" | "events"
-  >("all");
 
-  // track index inside filteredItems
+
+
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // Categories for filters
   const categories = [
     { id: "all", label: "All", easyReadLabel: "Everything" },
-    { id: "activities", label: "Daily Activities", easyReadLabel: "Activities" },
-    { id: "achievements", label: "Achievements", easyReadLabel: "Proud Moments" },
-    { id: "events", label: "Events", easyReadLabel: "Special Days" },
+    { id: "social", label: "Social Interaction", easyReadLabel: "Talking with People" },
+    { id: "health", label: "Health", easyReadLabel: "Staying Healthy" },
+    { id: "learning", label: "Learning", easyReadLabel: "Learning New Things" },
+    { id: "culture", label: "Culture", easyReadLabel: "Making Friends" },
+    { id: "relax", label: "Relaxation", easyReadLabel: "Relaxing" },
+    { id: "outing", label: "Outings", easyReadLabel: "Fun Day Out" },
   ];
 
-  const galleryItems = [
-    {
-      url: "/images/cricketpic1.jpg",
-      title: isEasyRead ? "Talking with People" : "Social Interaction",
-      category: "activities",
-    },
-    {
-      url: "/images/05.jpg",
-      title: isEasyRead ? "Staying Healthy" : "Health and Wellbeing",
-      category: "activities",
-    },
-    {
-      url: "/images/learningpic1.jpg",
-      title: isEasyRead ? "Learning New Things" : "Learning and Development",
-      category: "activities",
-    },
-    {
-      url: "/images/07.jpg",
-      title: isEasyRead ? "Making Friends" : "Cultural Community",
-      category: "activities",
-    },
-    {
-      url: "/images/blackpoolbeachpic2.jpg",
-      title: isEasyRead ? "Relaxing" : "Relaxation & Leisure",
-      category: "activities",
-    },
-    {
-      url: "/images/skydivinggrouppic.jpg",
-      title: isEasyRead ? "Fun Day Out" : "Community Outing",
-      category: "events",
-    },
+  // Main gallery category items
+const galleryCategories = [
+  /* -------------------------------------------------
+   * SOCIAL INTERACTION
+   * ------------------------------------------------- */
+  {
+    title: isEasyRead ? "Talking with People" : "Social Interaction",
+    cover: "/images/cricketpic1.jpg",
+    category: "social",
+    images: [
+      "/images/cricketpic1.jpg",
+      "/images/archiesgrouppicture.jpeg",
+      "/images/playingludogamepic.jpg",
+      "/images/playingpuzzlegame.jpg",
+      "/images/playingbowlingpic.jpg",
+      "/images/playingbowlingpic2.jpg",
+      "/images/sharingpic.jpg",
+      "/images/wheelchairwomenpic.jpg",
+    ],
+  },
+
+  /* -------------------------------------------------
+   * HEALTH & WELLBEING
+   * ------------------------------------------------- */
+  {
+    title: isEasyRead ? "Staying Healthy" : "Health and Wellbeing",
+    cover: "/images/05.jpg",
+    category: "health",
+    images: [
+      "/images/05.jpg",
+      "/images/archerypic1.jpg",
+      "/images/footballpic1.jpg",
+      "/images/wheelchairbasketballpic.jpg",
+      "/images/wheelchairbasketballpic2.jpg",
+      "/images/gardeningpic3.jpg",
+      "/images/cleaningleavesfromtheroadpic.jpg",
+      "/images/ridingtricyclepic.jpg",
+      "/images/sensoryplaypic1.jpg",
+    ],
+  },
+
+  /* -------------------------------------------------
+   * LEARNING & DEVELOPMENT
+   * ------------------------------------------------- */
+  {
+    title: isEasyRead ? "Learning New Things" : "Learning and Development",
+    cover: "/images/learningpic1.jpg",
+    category: "learning",
+    images: [
+      "/images/learningpic1.jpg",
+      "/images/nasheedproductionpic1.jpg",
+      "/images/artsandcraftpic4outside.jpg",
+      "/images/prayermatdrawingartscraft.jpg",
+      "/images/purplepatchkeychainsmadeinartsandcraft.jpg",
+      "/images/woodsandcraftoutsidepic.jpg",
+      "/images/woodsandcraftoutsidepic2.jpg",
+      "/images/craftprojectcoursecertificatepic2.jpg",
+      "/images/craftprojectcoursecertificatepic3.jpg",
+      "/images/certificateforindoorskydiving.jpg",
+      "/images/cookingpic1.jpg",
+      "/images/cookingpic3.jpg",
+      "/images/cookingpic4.jpg",
+    ],
+  },
+
+  /* -------------------------------------------------
+   * CULTURAL COMMUNITY
+   * ------------------------------------------------- */
+  {
+    title: isEasyRead ? "Making Friends" : "Cultural Community",
+    cover: "/images/07.jpg",
+    category: "culture",
+    images: [
+      "/images/07.jpg",
+      "/images/britaininbloomnorthwestawardceremony.jpeg",
+      "/images/sellingitemstoraisemoneyforcharitypic.jpeg",
+      "/images/cathedralgardenmanchester.jpg",
+      "/images/promotingpurplepatchpic.jpg",
+      "/images/christmasmancostumepic.jpg",
+      "/images/scoutspic1.jpg",
+    ],
+  },
+
+  /* -------------------------------------------------
+   * RELAXATION & LEISURE
+   * ------------------------------------------------- */
+  {
+    title: isEasyRead ? "Relaxing" : "Relaxation & Leisure",
+    cover: "/images/blackpoolbeachpic2.jpg",
+    category: "relax",
+    images: [
+      "/images/blackpoolbeachpic2.jpg",
+      "/images/blackpoolbeachpic1.jpg",
+    ],
+  },
+
+  /* -------------------------------------------------
+   * COMMUNITY OUTING
+   * ------------------------------------------------- */
+  {
+    title: isEasyRead ? "Fun Day Out" : "Community Outing",
+    cover: "/images/skydivinggrouppic.jpg",
+    category: "outing",
+    images: [
+      "/images/skydivinggrouppic.jpg",
+      "/images/skydivinggrouppic2.jpg",
+      "/images/flyingmanindoorskydivingpic2.jpg",
+      "/images/goingtoalpacafarmpic.jpg",
+      "/images/goingtoalpacafarmpic2.jpg",
+      "/images/alpacafarmpic3.jpg",
+      "/images/highlandcowpic2.jpg",
+      "/images/meetinghighlandcowpic.jpg",
+      "/images/diggingsandpic.jpg",
+    ],
+  },
+];
 
 
-    
-  ];
 
+
+  // Filter by category
   const filteredItems =
     selectedCategory === "all"
-      ? galleryItems
-      : galleryItems.filter((item) => item.category === selectedCategory);
+      ? galleryCategories
+      : galleryCategories.filter((item) => item.category === selectedCategory);
 
-  // Next / Previous navigation
+  // Next/Prev navigation inside galleryCategories[x].images[y]
   const openNext = () => {
     if (lightboxIndex === null) return;
-    setLightboxIndex((lightboxIndex + 1) % filteredItems.length);
+    const images = filteredItems[lightboxIndex].images;
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
   };
 
   const openPrev = () => {
     if (lightboxIndex === null) return;
-    setLightboxIndex((lightboxIndex - 1 + filteredItems.length) % filteredItems.length);
+    const images = filteredItems[lightboxIndex].images;
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
   // Keyboard support
@@ -81,13 +172,17 @@ export default function Gallery() {
       if (e.key === "Escape") setLightboxIndex(null);
     };
 
+
+
+
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [lightboxIndex]);
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
+
+      {/* ======= Hero Section ======= */}
       <section className="relative bg-gradient-to-br from-primary/10 via-primary/5 to-background py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-4">
@@ -99,46 +194,54 @@ export default function Gallery() {
                 ? "See what we do every day. Look at our fun activities and happy moments!"
                 : "Explore our collection of photos and videos showcasing daily activities, achievements, and community events."}
             </p>
-            <br />
-            <br />
-            <p> Timeline video of story book would be here maybe? </p>
+
+
+          
           </div>
         </div>
       </section>
 
-      {/* Gallery Section */}
+      {/* ======= Gallery Section ======= */}
       <section className="py-16 md:py-20 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Filter Tabs */}
+
+          {/* Category Filter Buttons */}
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             {categories.map((category) => (
               <Button
                 key={category.id}
                 variant={selectedCategory === category.id ? "default" : "outline"}
-                onClick={() => setSelectedCategory(category.id as typeof selectedCategory)}
-                data-testid={`button-filter-${category.id}`}
+                onClick={() => setSelectedCategory(category.id)}
               >
                 {isEasyRead ? category.easyReadLabel : category.label}
               </Button>
             ))}
           </div>
 
-          {/* Gallery Grid */}
+          {/* Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredItems.map((item, index) => (
               <Card
                 key={index}
                 className="overflow-hidden hover-elevate active-elevate-2 cursor-pointer"
-                onClick={() => setLightboxIndex(index)}
-                data-testid={`card-gallery-${index}`}
+                onClick={() => {
+                  setLightboxIndex(index);
+                  setCurrentImageIndex(0);
+                }}
               >
                 <CardContent className="p-0">
                   <div className="aspect-[4/3] relative overflow-hidden">
                     <img
-                      src={item.url}
+                      src={item.cover}
                       alt={item.title}
                       className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                      data-testid={`img-gallery-${index}`}
+
+
+
+
+
+
+
                     />
                   </div>
                   <div className="p-4">
@@ -151,33 +254,24 @@ export default function Gallery() {
             ))}
           </div>
 
-          {/* Future Instagram Integration Placeholder */}
-          <div className="mt-16 max-w-2xl mx-auto">
-            <Card className="bg-muted/50" data-testid="card-instagram-placeholder">
-              <CardContent className="p-8 text-center space-y-4">
-                <h3 className="font-heading text-xl font-semibold text-foreground">
-                  {isEasyRead ? "Follow Us on Instagram" : "Stay Connected"}
-                </h3>
-                <p className="text-muted-foreground">
-                  {isEasyRead
-                    ? "We will add Instagram photos here soon. You can see all our latest pictures!"
-                    : "Future integration: Follow our Instagram feed for the latest updates, photos, and stories from Purple Patch Partners."}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+
+
         </div>
       </section>
 
-      {/* Lightbox with Left/Right Scrolling */}
+      {/* ======= Lightbox ======= */}
       {lightboxIndex !== null && (
         <div
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
           onClick={() => setLightboxIndex(null)}
-          role="dialog"
+
+
+
+
+
+
           aria-modal="true"
-          aria-label="Image lightbox"
-          data-testid="lightbox"
+          role="dialog"
         >
           {/* Close Button */}
           <Button
@@ -185,45 +279,58 @@ export default function Gallery() {
             size="icon"
             className="absolute top-4 right-4 text-white hover:bg-white/20"
             onClick={() => setLightboxIndex(null)}
-            aria-label="Close lightbox"
-            data-testid="button-close-lightbox"
           >
+
+
+
+
+
+
             <X className="h-6 w-6" />
           </Button>
 
-          {/* Previous Button */}
+          {/* Prev Arrow */}
           <button
             className="absolute left-4 text-white text-4xl px-4 py-2 hover:bg-white/20 rounded"
             onClick={(e) => {
               e.stopPropagation();
               openPrev();
             }}
-            aria-label="Previous image"
           >
+
+
+
+
+
+
             ‹
           </button>
 
-          {/* Image */}
+          {/* Lightbox Image */}
           <div className="max-w-5xl w-full" onClick={(e) => e.stopPropagation()}>
             <img
-              src={filteredItems[lightboxIndex].url}
+              src={filteredItems[lightboxIndex].images[currentImageIndex]}
               alt={filteredItems[lightboxIndex].title}
-              className="w-full h-auto rounded-lg"
-              data-testid="img-lightbox"
+              className="max-h-[80vh] max-w-[80vw] object-contain mx-auto rounded-lg"
             />
+
+
+
+
+
+
             <p className="text-white text-center mt-4 text-lg font-medium">
               {filteredItems[lightboxIndex].title}
             </p>
           </div>
 
-          {/* Next Button */}
+          {/* Next Arrow */}
           <button
             className="absolute right-4 text-white text-4xl px-4 py-2 hover:bg-white/20 rounded"
             onClick={(e) => {
               e.stopPropagation();
               openNext();
             }}
-            aria-label="Next image"
           >
             ›
           </button>
