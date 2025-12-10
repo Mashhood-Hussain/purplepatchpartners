@@ -265,6 +265,8 @@ export function Header() {
 
               {/* Refer Button */}
               <Link href="/referrals" onClick={() => setIsMobileMenuOpen(false)}>
+                            <br></br>
+                            <br></br>
                 <Button className="w-full" size="lg">
                   {isEasyRead ? "Get Help" : "Refer Someone"}
                 </Button>
