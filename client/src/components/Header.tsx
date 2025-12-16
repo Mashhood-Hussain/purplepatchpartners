@@ -19,7 +19,7 @@ export function Header() {
     // ABOUT US (NON CLICKABLE)
     {
       label: "About Us",
-      easyReadLabel: "About Us",
+      easyReadLabel: "Who We Are",
       isHoverDropdown: true,
       items: [
         { path: "/team", label: "Our Team", easyReadLabel: "Meet the Team" },
@@ -28,12 +28,12 @@ export function Header() {
     },
 
     { path: "/stories", label: "Success Stories", easyReadLabel: "Happy Stories" },
-    { path: "/gallery", label: "Gallery", easyReadLabel: "Photos & Videos" },
+    { path: "/gallery", label: "Gallery", easyReadLabel: "Photos" },
 
     // GETTING INVOLVED (NON CLICKABLE)
     {
       label: "Get Involved",
-      easyReadLabel: "Get Involved",
+      easyReadLabel: "How You Can Help",
       isHoverDropdown: true,
       items: [
         { path: "/vacancies", label: "Vacancies", easyReadLabel: "Job Vacancies" },
