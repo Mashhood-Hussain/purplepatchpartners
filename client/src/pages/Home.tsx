@@ -17,7 +17,8 @@ function Slideshow() {
     "britaininbloomnorthwestawardceremony.jpeg",
     "cathedralgardenmanchester.jpg",
     "certificateforindoorskydiving.jpg",
-    "christmasmancostumepic.jpg",
+
+    
     "cleaningleavesfromtheroadpic.jpg",
     "cookingpic1.jpg",
     "cookingpic3.jpg",
@@ -59,7 +60,7 @@ function Slideshow() {
 
 const [index, setIndex] = useState(0);
 
-  const speed = 2000; 
+  const speed = 5000; 
 
   useEffect(() => {
     const timer = setInterval(() => {

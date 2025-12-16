@@ -102,7 +102,8 @@ const galleryCategories = [
       "/images/sellingitemstoraisemoneyforcharitypic.jpeg",
       "/images/cathedralgardenmanchester.jpg",
       "/images/promotingpurplepatchpic.jpg",
-      "/images/christmasmancostumepic.jpg",
+
+      
       "/images/scoutspic1.jpg",
     ],
   },

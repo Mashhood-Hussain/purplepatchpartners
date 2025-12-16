@@ -46,3 +46,4 @@ registerRoutes(app); // ✅ includes your validated /api/referrals etc.
     log(`✅ Server running on http://localhost:${port} (${mode} mode)`);
   });
 })();
+

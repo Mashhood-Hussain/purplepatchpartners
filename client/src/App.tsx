@@ -18,11 +18,9 @@ import InfoSEND from "@/pages/InfoSEND";
 import NotFound from "@/pages/not-found";
 import TeamPage from "./pages/Team";
 import NewsPage from "./pages/News";
-import ContactPage from "./pages/Contact"
+import ContactPage from "@/pages/Contact";
 import VacanciesPage from "@/pages/vacancies";
-
-
-
+import React from "react";
 
 function Router() {
   return (
