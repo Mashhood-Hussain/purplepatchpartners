@@ -234,6 +234,41 @@
     font-size: 1.25rem; /* 24px */
   }
 
+  /* =========================================
+   FORCE DROPDOWN MENUS TO STACK VERTICALLY
+   ========================================= */
+
+nav[aria-label="Main navigation"] .group > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.large-text-mode nav[aria-label="Main navigation"] .group > div a {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+/* =========================================
+   NAVBAR BASELINE NORMALISATION
+   ========================================= */
+
+nav[aria-label="Main navigation"] > * {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+nav[aria-label="Main navigation"] a,
+nav[aria-label="Main navigation"] span {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+nav[aria-label="Main navigation"] span {
+  transform: translateY(1px);
+}
+
 
   /* Global base text size */
   body {
@@ -345,20 +380,28 @@ body.dark.high-contrast-mode {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    column-gap: 2.8rem;
-    row-gap: 0.8rem;
+    column-gap: 3rem;
+    row-gap: 1.2rem;
+    max-width: 100%;
   }
 
-  /* Row 1: first 4 items */
-  .large-text-mode nav[aria-label="Main navigation"].main-nav > *:nth-child(-n+4) {
+  /* FIRST ROW */
+  .large-text-mode nav[aria-label="Main navigation"].main-nav > *:nth-child(1),
+  .large-text-mode nav[aria-label="Main navigation"].main-nav > *:nth-child(2),
+  .large-text-mode nav[aria-label="Main navigation"].main-nav > *:nth-child(3),
+  .large-text-mode nav[aria-label="Main navigation"].main-nav > *:nth-child(4) {
     order: 1;
   }
 
-  /* Row 2: items 5 onward */
-  .large-text-mode nav[aria-label="Main navigation"].main-nav > *:nth-child(n+5) {
+  /* SECOND ROW */
+  .large-text-mode nav[aria-label="Main navigation"].main-nav > *:nth-child(5),
+  .large-text-mode nav[aria-label="Main navigation"].main-nav > *:nth-child(6),
+  .large-text-mode nav[aria-label="Main navigation"].main-nav > *:nth-child(7),
+  .large-text-mode nav[aria-label="Main navigation"].main-nav > *:nth-child(8) {
     order: 2;
   }
 }
+
 
 .main-nav-shift {
   margin-left: -2rem;

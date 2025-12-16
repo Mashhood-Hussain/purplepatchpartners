@@ -20,6 +20,8 @@ import TeamPage from "./pages/Team";
 import NewsPage from "./pages/News";
 import ContactPage from "@/pages/Contact";
 import VacanciesPage from "@/pages/vacancies";
+import { Donate } from "@/pages/donate";
+
 import React from "react";
 
 function Router() {
@@ -38,6 +40,7 @@ function Router() {
       <Route path="/news" component={NewsPage} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/vacancies" component={VacanciesPage} />
+      <Route path="/donate" component={Donate} />
       <Route component={NotFound} />
     </Switch>
   );
