@@ -50,7 +50,8 @@ export function Header() {
       <div className="container mx-auto px-4 lg:px-8">
 
         {/* ACCESSIBILITY BAR */}
-        <div className="flex justify-end gap-2 border-b py-2">
+<div className="grid gap-2 border-b py-2 accessibility-bar sm:flex sm:justify-end">
+
           <Button size="sm" variant={isEasyRead ? "default" : "ghost"} onClick={toggleEasyRead}>
             <Eye className="h-4 w-4 mr-1" /> Easy Read
           </Button>

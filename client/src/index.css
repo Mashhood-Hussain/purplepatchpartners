@@ -248,6 +248,45 @@ nav[aria-label="Main navigation"] .group > div {
   padding-bottom: 0.75rem;
 }
 
+/* Mobile accessibility bar fixes */
+@media (max-width: 640px) {
+  .large-text-mode header button {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 0.95em; /* still larger, but prevents overflow */
+  }
+}
+
+/* Mobile accessibility bar */
+@media (max-width: 640px) {
+  /* Normal mode: 3 in a row */
+  .accessibility-bar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+  }
+
+  /* Large Text Mode: 2 top, 1 bottom */
+  .large-text-mode .accessibility-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Center the 3rd button */
+  .large-text-mode .accessibility-bar > :nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
+  /* Improve tap targets */
+  .large-text-mode .accessibility-bar button {
+    width: 102%;
+  }
+}
+
+.large-text-mode .accessibility-bar > :nth-child(3) {
+  max-width: 14rem;
+}
+
+
 /* =========================================
    NAVBAR BASELINE NORMALISATION
    ========================================= */
@@ -340,6 +379,7 @@ body.dark.high-contrast-mode {
   --accent: 60 70% 75%;
   --accent-foreground: 0 0% 0%;
 }
+
 
 /* ---------------------------------------- */
 /* Standard Large Text Mode site scaling    */
