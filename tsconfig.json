@@ -2,8 +2,7 @@
   "include": [
     "client/src/**/*",
     "shared/**/*",
-    "server/**/*",
-    "cloudinary.d.ts"  // Add this line
+    "server/**/*"
   ],
   "exclude": [
     "node_modules",
