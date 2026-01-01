@@ -259,38 +259,49 @@ nav[aria-label="Main navigation"] .group > div {
 }
 
 /* Mobile accessibility bar fixes */
-@media (max-width: 640px) {
+@media (max-width: 380px) {
   .large-text-mode header button {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
-    font-size: 0.95em; /* still larger, but prevents overflow */
+    font-size: 0.85em; /* still larger, but prevents overflow */
   }
 }
 
 /* =========================================
    Accessibility bar – MOBILE ONLY
    ========================================= */
-@media (max-width: 640px) {
-
-  
+/* Base styles */
+@media (max-width: 380px) {
   .accessibility-bar {
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    width: 60%;
-    margin-left: auto; /* push to the right */
+    justify-content: flex-end; /* Align the bar to the right */
+    width: 100%; /* Allow it to take up more space */
+    padding-right: 10px; /* Add some padding to the right */
   }
 
   .large-text-mode .accessibility-bar {
-    width: 100%;
+    width: 100%; /* Ensure 100% on large text mode */
+    flex-direction: column; /* Stack buttons in a column when in large text mode */
+    align-items: flex-start; /* Align buttons to the left */
+    margin-top: 10px; /* Optional: Add a little margin for spacing */
   }
 
   .accessibility-bar button {
     flex: 1;
     white-space: nowrap;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 
+
+
+/* Optional: A max-width for the buttons in normal mode if the screen is really small */
+@media (max-width: 320px) {
+  .accessibility-bar {
+    width: 100%; /* Take up the full width if the screen is super small */
+  }
+}
 
 
 
