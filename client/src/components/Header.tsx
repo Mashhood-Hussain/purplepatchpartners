@@ -4,6 +4,7 @@ import { Menu, X, Eye, Type, Contrast } from "lucide-react";
 import { useState } from "react";
 import { useAccessibility } from "@/contexts/AccessibilityContext";
 import { ChevronDown } from "lucide-react";
+import { useEffect } from "react";
 
 
 export function Header() {
@@ -45,30 +46,50 @@ export function Header() {
     { path: "/contact", label: "Contact Us", easyReadLabel: "Contact" },
   ];
 
+
+useEffect(() => {
+  if (isMobileMenuOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+}, [isMobileMenuOpen]);
+
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur">
+  <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
       <div className="container mx-auto px-4 lg:px-8">
 
-        {/* ACCESSIBILITY BAR */}
-<div className="grid gap-2 border-b py-2 accessibility-bar sm:flex sm:justify-end">
 
-          <Button size="sm" variant={isEasyRead ? "default" : "ghost"} onClick={toggleEasyRead}>
-            <Eye className="h-4 w-4 mr-1" /> Easy Read
-          </Button>
-<Button
-  size="sm"
-  variant={isHighContrast ? "default" : "ghost"}
-  onClick={toggleHighContrast}
->
-  <Contrast className="h-4 w-4 mr-1" />
-  High Contrast
-</Button>
+{/* ACCESSIBILITY BAR */}
+<div className="flex border-b py-2">
+  <div className="ml-auto flex gap-2 accessibility-bar">
+    <Button
+      size="sm"
+      variant={isEasyRead ? "default" : "ghost"}
+      onClick={toggleEasyRead}
+    >
+      <Eye className="h-4 w-4 mr-1" /> Easy Read
+    </Button>
 
+    <Button
+      size="sm"
+      variant={isHighContrast ? "default" : "ghost"}
+      onClick={toggleHighContrast}
+    >
+      <Contrast className="h-4 w-4 mr-1" />
+      High Contrast
+    </Button>
 
-          <Button size="sm" variant={textSize === "large" ? "default" : "ghost"} onClick={toggleTextSize}>
-            <Type className="h-4 w-4 mr-1" /> Large Text
-          </Button>
-        </div>
+    <Button
+      size="sm"
+      variant={textSize === "large" ? "default" : "ghost"}
+      onClick={toggleTextSize}
+    >
+      <Type className="h-4 w-4 mr-1" /> Large Text
+    </Button>
+  </div>
+</div>
+
 
         {/* MAIN NAV */}
         <div className="flex h-20 items-center justify-between">
@@ -82,84 +103,90 @@ export function Header() {
           </Link>
 
           {/* DESKTOP NAV */}
-  <nav
-  aria-label="Main navigation"
-  className="hidden lg:flex items-center gap-8 main-nav"
->
-  {navigationItems.map((item, idx) => {
-    // 🔹 HOVER DROPDOWN (NOT CLICKABLE)
-    if (item.isHoverDropdown) {
-      return (
-          <div key={idx} className="relative group flex items-center">
-<span className="cursor-default text-xl font-medium text-foreground leading-none flex items-center gap-1">
-  {isEasyRead ? item.easyReadLabel : item.label}
-  <ChevronDown
-    className="h-4 w-4 opacity-70 translate-y-[1px] group-hover:rotate-180 transition-transform duration-200"
-    aria-hidden="true"
-  />
-</span>
-
-
-          <div
-            className="
-              absolute left-0 top-full mt-3
-              w-52 rounded-md border bg-white shadow-lg
-              opacity-0 invisible
-              group-hover:opacity-100 group-hover:visible
-              transition-all duration-200
-            "
+          <nav
+            aria-label="Main navigation"
+            className="hidden lg:flex items-center gap-8 main-nav"
           >
-            {item.items.map((sub, i) => (
-              <Link
-                key={i}
-                href={sub.path} // ✅ ALWAYS a string
-                className="block px-4 py-3 text-sm hover:bg-primary/10 whitespace-nowrap"
-              >
-                {isEasyRead ? sub.easyReadLabel : sub.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      );
-    }
+            {navigationItems.map((item, idx) => {
+              // 🔹 HOVER DROPDOWN (NOT CLICKABLE)
+              if (item.isHoverDropdown) {
+                return (
+                  <div key={idx} className="relative group flex items-center">
+                    <span className="cursor-default text-xl font-medium text-foreground leading-none flex items-center gap-1">
+                      {isEasyRead ? item.easyReadLabel : item.label}
+                      <ChevronDown
+                        className="h-4 w-4 opacity-70 translate-y-[1px] group-hover:rotate-180 transition-transform duration-200"
+                        aria-hidden="true"
+                      />
+                    </span>
 
-    // 🔹 NORMAL CLICKABLE LINK
-    return (
-      <Link
-        key={idx}
-        href={item.path!} // ✅ safe because this branch only runs when path exists
-        className={`text-xl font-medium transition-colors hover:text-primary ${
-          location === item.path ? "text-primary" : "text-foreground"
-        }`}
-      >
-        {isEasyRead ? item.easyReadLabel : item.label}
-      </Link>
-    );
-  })}
-</nav>
+                    <div
+                      className="
+                        absolute left-0 top-full mt-3
+                        w-52 rounded-md border bg-white shadow-lg
+                        opacity-0 invisible
+                        group-hover:opacity-100 group-hover:visible
+                        transition-all duration-200
+                      "
+                    >
+                      {item.items.map((sub, i) => (
+                        <Link
+                          key={i}
+                          href={sub.path}
+                          className="block px-4 py-3 text-sm hover:bg-primary/10 whitespace-nowrap"
+                        >
+                          {isEasyRead ? sub.easyReadLabel : sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
 
-
+              // 🔹 NORMAL CLICKABLE LINK
+              return (
+                <Link
+                  key={idx}
+                  href={item.path!}
+                  className={`text-xl font-medium transition-colors hover:text-primary ${
+                    location === item.path ? "text-primary" : "text-foreground"
+                  }`}
+                >
+                  {isEasyRead ? item.easyReadLabel : item.label}
+                </Link>
+              );
+            })}
+          </nav>
           {/* RIGHT SIDE */}
           <div className="flex items-center gap-3">
             <Link href="/referrals" className="hidden md:inline-block">
               <Button>{isEasyRead ? "Get Help" : "Refer Someone"}</Button>
             </Link>
 
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X /> : <Menu />}
-            </Button>
+<Button
+  variant="ghost"
+  size="icon"
+  className="lg:hidden" // Ensure the button is hidden on large screens
+  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+>
+  {isMobileMenuOpen ? <X /> : <Menu />}  {/* Toggle between X and Menu */}
+</Button>
+
           </div>
         </div>
       </div>
 
-      {/* MOBILE MENU */}
+{/* MOBILE MENU */}
 {isMobileMenuOpen && (
-  <div className="lg:hidden border-t border-border bg-background relative z-20">
+  <div
+    className="lg:hidden fixed inset-x-0 z-40 bg-background border-t border-border mobile-menu"
+    style={{
+      top: "var(--header-height)",
+      maxHeight: "calc(100vh - var(--header-height))",
+      overflowY: "auto",
+    }}
+  >
+
     <div className="container mx-auto px-2 py-4 space-y-1">
       {navigationItems.map((item, idx) => {
         // 🔹 DESKTOP HOVER DROPDOWNS → EXPANDED SECTIONS ON MOBILE

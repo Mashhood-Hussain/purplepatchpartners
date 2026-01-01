@@ -211,6 +211,16 @@
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
+:root {
+  --header-height: 8rem;
+}
+
+/* Large text needs more space */
+.large-text-mode {
+  --header-height: 11rem;
+}
+
+
 @layer base {
   * {
     @apply border-border;
@@ -257,34 +267,31 @@ nav[aria-label="Main navigation"] .group > div {
   }
 }
 
-/* Mobile accessibility bar */
+/* =========================================
+   Accessibility bar – MOBILE ONLY
+   ========================================= */
 @media (max-width: 640px) {
-  /* Normal mode: 3 in a row */
+
+  
   .accessibility-bar {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    justify-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 60%;
+    margin-left: auto; /* push to the right */
   }
 
-  /* Large Text Mode: 2 top, 1 bottom */
   .large-text-mode .accessibility-bar {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
   }
 
-  /* Center the 3rd button */
-  .large-text-mode .accessibility-bar > :nth-child(3) {
-    grid-column: 1 / -1;
-    justify-self: center;
-  }
-
-  /* Improve tap targets */
-  .large-text-mode .accessibility-bar button {
-    width: 102%;
+  .accessibility-bar button {
+    flex: 1;
+    white-space: nowrap;
   }
 }
 
-.large-text-mode .accessibility-bar > :nth-child(3) {
-  max-width: 14rem;
-}
+
 
 
 /* =========================================
@@ -542,4 +549,5 @@ body.dark.high-contrast-mode {
     inset: -1px;
   }
 }
+
 
